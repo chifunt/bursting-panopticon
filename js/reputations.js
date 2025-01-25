@@ -17,9 +17,24 @@ export const Reputations = (() => {
     }
   };
 
-  const incrementReputation = (name, amount) => {
+  // Generalized Change Method
+  const changeReputation = (name, amount) => {
+    if (typeof name !== 'string') {
+      console.warn(`Reputation name must be a string. Received: ${typeof name}`);
+      return;
+    }
+    if (typeof amount !== 'number') {
+      console.warn(`Amount must be a number. Received: ${typeof amount}`);
+      return;
+    }
+
     if (reputations.hasOwnProperty(name)) {
       reputations[name] += amount;
+      // Prevent negative values
+      if (reputations[name] < 0) reputations[name] = 0;
+      // Optional: Clamp to a maximum value
+      const MAX_REPUTATION_VALUE = 1000;
+      if (reputations[name] > MAX_REPUTATION_VALUE) reputations[name] = MAX_REPUTATION_VALUE;
       updateDOM(name, reputations[name]);
     } else {
       console.warn(`Reputation "${name}" does not exist.`);
@@ -46,7 +61,7 @@ export const Reputations = (() => {
     reputations,
     getReputation,
     setReputation,
-    incrementReputation,
+    changeReputation, // Exposed generalized change method
     init, // Expose the init method
   };
 })();
