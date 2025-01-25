@@ -12,6 +12,7 @@
   padding: 2vw;
   gap: 1vw;
   border: 0.5vw solid var(--overlay-color);
+  z-index: 2;
 
   /* The key properties for fade transitions: */
   opacity: 0;
