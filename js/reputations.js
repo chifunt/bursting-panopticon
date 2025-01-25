@@ -61,7 +61,7 @@ export const Reputations = (() => {
     reputations,
     getReputation,
     setReputation,
-    changeReputation, // Exposed generalized change method
-    init, // Expose the init method
+    changeReputation,
+    init,
   };
 })();
