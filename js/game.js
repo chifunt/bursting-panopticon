@@ -3,6 +3,7 @@ import { Reputations } from './reputations.js';
 import { TimeManager } from './timeManager.js';
 import { Utils } from './utils.js';
 import { Markers } from './markers.js';
+import { Events } from './events.js';
 
 export const Game = (() => {
   const debugMode = true;
@@ -19,6 +20,9 @@ export const Game = (() => {
     // Initialize Markers
     Markers.init();
 
+    // Initialize Events
+    Events.init();
+
     // Start the game time
     TimeManager.startTime();
   };
@@ -26,20 +30,28 @@ export const Game = (() => {
   // Callback for when the next day begins
   const onNextDay = (day) => {
     Utils.log(`Day ${day} has begun.`);
+    // Additional logic for a new day can be added here
   };
 
   // Handle specific time events
   const handleTimeEvent = (day, time) => {
-    // Example: At 06:00 on Day 1, show 'pin-capital' marker
-    if (day === 1 && time === '06:00') {
-      Markers.showMarker('pin-capital');
-      TimeManager.stopTime();
-      Utils.log('Marker "pin-capital" displayed at 06:00 on Day 1.');
-    }
+    // Check if there's an event at the current day and time
+    const event = Events.getEventByTime(day, time);
+    if (event) {
+      Markers.showMarker(event.markerId);
+      Utils.log(`Marker "${event.markerId}" displayed at ${time} on Day ${day}.`);
 
-    // Add more time-based events here as needed
+      // STOP the time here so the player can't ignore the marker
+      TimeManager.stopTime();
+    }
   };
 
+  // Handle marker click events to show associated events
+  const handleMarkerClick = (markerId) => {
+    Events.handleMarkerEvent(markerId);
+  };
+
+  // Expose methods
   return {
     init,
     onNextDay,
@@ -47,6 +59,8 @@ export const Game = (() => {
     Resources,
     Reputations,
     TimeManager,
-    Markers
+    Markers,
+    Events,
+    handleMarkerClick
   };
 })();

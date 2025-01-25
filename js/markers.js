@@ -1,3 +1,5 @@
+import { Game } from './game.js';
+
 export const Markers = (() => {
   // List of marker IDs
   const markers = [
@@ -8,7 +10,7 @@ export const Markers = (() => {
     'pin-gas'
   ];
 
-  // Initialize all markers to be hidden
+  // Initialize all markers to be hidden and set up click listeners
   const init = () => {
     markers.forEach(markerId => {
       hideMarker(markerId);
@@ -57,10 +59,10 @@ export const Markers = (() => {
     }
   };
 
-  // Handle marker click event
+  // Handle marker click event by delegating to Game
   const handleMarkerClick = (markerId) => {
     console.log(`Marker "${markerId}" was clicked.`);
-    // Implement additional logic here, such as showing event popups
+    Game.handleMarkerClick(markerId);
   };
 
   return {
