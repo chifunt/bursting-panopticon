@@ -5,4 +5,5 @@
   width: 100%;
   height: 100%;
   box-shadow: 0 0 10vw rgba(0,0,0,0.9) inset;
+  pointer-events: none;
 }
