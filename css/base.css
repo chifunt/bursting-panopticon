@@ -16,6 +16,7 @@ button:hover {
   background-color: black;
   color: var(--oil-color);
   border: 0.15vw solid var(--oil-color);
+  text-shadow: 0 0 1vw var(--oil-color);
 }
 
 p {
