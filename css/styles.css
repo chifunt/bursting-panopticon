@@ -80,7 +80,7 @@ p#current-time {
   padding: 2vw;
   gap: 1vw;
   border: 0.5vw solid var(--overlay-color);
-  /* display: none; */
+  display: none;
 }
 
 .minimize-container {
