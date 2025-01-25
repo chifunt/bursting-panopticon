@@ -44,6 +44,10 @@ export const TimeManager = (() => {
       }
     }
     updateDisplay();
+
+    // Notify Game about the current time for event handling
+    const formattedTime = getCurrentTime();
+    Game.handleTimeEvent(currentDay, formattedTime);
   };
 
   const nextDay = () => {

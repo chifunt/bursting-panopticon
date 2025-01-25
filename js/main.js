@@ -3,6 +3,7 @@ import { Game } from './game.js';
 window.addEventListener('DOMContentLoaded', () => {
   Game.init();
   Game.TimeManager.setMinuteDuration(2);
+
   setupEventListeners();
 });
 
@@ -18,6 +19,6 @@ const setupEventListeners = () => {
   decisionButton.addEventListener('click', () => {
     // Handle decision logic here
     eventPopup.style.display = 'none';
-    TimeManager.startTime(); // Resume time
+    Game.TimeManager.startTime(); // Resume time
   });
 };
