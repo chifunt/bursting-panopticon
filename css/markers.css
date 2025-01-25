@@ -1,0 +1,146 @@
+/* Styles for the .pin element */
+.pin {
+  width: 3vw;
+  height: 3vw;
+  border-radius: 50% 50% 50% 0;
+  background: #89849b;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -2vw 0 0 -2vw;
+  animation-name: bounce;
+  animation-fill-mode: both;
+  animation-duration: 1s;
+  box-shadow: 0 0 1.5vw black;
+}
+
+/* Styles for the ::after pseudo-element of .pin */
+.pin::after {
+  content: '';
+  width: 1.4vw;
+  height: 1.4vw;
+  margin: 0.8vw 0 0 0.8vw;
+  background: #2F2F2F;
+  position: absolute;
+  border-radius: 50%;
+}
+
+/* Styles for the .pulse element */
+.pulse {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 11px 0 0 -12px;
+  transform: rotateX(55deg);
+  z-index: -2;
+}
+
+/* Styles for the ::after pseudo-element of .pulse */
+.pulse::after {
+  content: "";
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  margin: -13px 0 0 -13px;
+  animation: pulsate 1s ease-out;
+  animation-iteration-count: infinite;
+  opacity: 0.0;
+  box-shadow: 0 0 1px 2px #89849b;
+  animation-delay: 1.1s;
+}
+
+/* Keyframes for the pulsate animation */
+@keyframes pulsate {
+  0% {
+    transform: scale(0.1, 0.1);
+    opacity: 0.0;
+  }
+  50% {
+    opacity: 1.0;
+  }
+  100% {
+    transform: scale(1.2, 1.2);
+    opacity: 0;
+  }
+}
+
+/* Keyframes for the bounce animation */
+@keyframes bounce {
+  0% {
+    opacity: 0;
+    transform: translateY(-2000px) rotate(-45deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(30px) rotate(-45deg);
+  }
+  80% {
+    transform: translateY(-10px) rotate(-45deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-45deg);
+  }
+}
+
+#markers-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#pin-capital, #pin-air, #pin-oil, #pin-cavitation, #pin-gas {
+  position: absolute;
+  pointer-events: all;
+}
+
+#pin-capital div:hover, #pin-air div:hover, #pin-oil div:hover, #pin-cavitation div:hover, #pin-gas div:hover {
+  background: white;
+}
+
+#pin-capital {
+  top: 42%;
+  left: 47.5%;
+}
+
+#pin-capital div {
+  background: #BC5117;
+}
+
+#pin-air {
+  top: 44%;
+  left: 29%;
+}
+#pin-air div {
+  background: #209FA8;
+}
+
+#pin-oil {
+  top: 66%;
+  left: 42.5%;
+}
+#pin-oil div {
+  background: #F2A000;
+}
+
+#pin-cavitation {
+  top: 25%;
+  left: 60%;
+}
+#pin-cavitation div {
+  background-color: #CA070E;
+}
+
+#pin-gas {
+  top: 63%;
+  left: 69%;
+}
+#pin-gas div {
+  background: #94B50E;
+}
