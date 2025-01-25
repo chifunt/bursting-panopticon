@@ -71,14 +71,11 @@ export const Events = (() => {
 
   // Show event popup with specific event data
   const showEvent = (event) => {
-    // Check if the event has already been triggered
     if (event.triggered) return;
 
     // Populate the popup with event data
     eventImage.src = event.imageSrc;
     eventTitle.innerText = event.title;
-
-    // Clear previous paragraphs
     eventTextContainer.innerHTML = '';
     event.paragraphs.forEach(paragraph => {
       const p = document.createElement('p');
@@ -86,7 +83,6 @@ export const Events = (() => {
       eventTextContainer.appendChild(p);
     });
 
-    // Clear previous buttons
     eventButtonsContainer.innerHTML = '';
     event.buttons.forEach(button => {
       const btn = document.createElement('button');
@@ -95,8 +91,10 @@ export const Events = (() => {
       eventButtonsContainer.appendChild(btn);
     });
 
-    // Display the popup
-    eventPopup.style.display = 'flex';
+    // Instead of eventPopup.style.display = 'flex';
+    // just add the 'visible' class:
+    eventPopup.classList.add('visible');
+
     Utils.log(`Event "${event.id}" displayed.`);
 
     // Mark the event as triggered
@@ -105,7 +103,10 @@ export const Events = (() => {
 
   // Hide the event popup
   const hideEventPopup = () => {
-    eventPopup.style.display = 'none';
+    // Instead of eventPopup.style.display = 'none';
+    // remove the 'visible' class:
+    eventPopup.classList.remove('visible');
+
     Utils.log('Event popup hidden.');
   };
 

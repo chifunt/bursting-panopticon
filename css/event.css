@@ -1,8 +1,9 @@
+/* Base styles: start hidden and non-interactive by default */
 .event-popup {
+  display: flex;
   position: absolute;
   height: 80%;
   width: 40%;
-  display: flex;
   background-color: var(--overlay-color);
   box-shadow: 0 0 2vw black, 0 0 4vw black inset;
   border-radius: 3vw;
@@ -11,7 +12,18 @@
   padding: 2vw;
   gap: 1vw;
   border: 0.5vw solid var(--overlay-color);
-  display: none;
+
+  /* The key properties for fade transitions: */
+  opacity: 0;
+  pointer-events: none; /* So clicks pass through when hidden. */
+  transition: opacity 0.2s ease-in-out; /* 0.5s fade animation */
+}
+
+/* When visible, make it flex and fully opaque */
+.event-popup.visible {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto; /* Restores clickability */
 }
 
 .event-popup img {
