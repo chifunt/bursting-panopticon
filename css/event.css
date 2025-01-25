@@ -1,0 +1,54 @@
+.event-popup {
+  position: absolute;
+  height: 80%;
+  width: 40%;
+  display: flex;
+  background-color: var(--overlay-color);
+  box-shadow: 0 0 2vw black, 0 0 4vw black inset;
+  border-radius: 3vw;
+  flex-direction: column;
+  align-items: center;
+  padding: 2vw;
+  gap: 1vw;
+  border: 0.5vw solid var(--overlay-color);
+  display: none;
+}
+
+.event-popup img {
+  max-width: 40vw;
+  border-radius: 2vw;
+  box-shadow: 0.1vw 0.2vw 1vw black, 0 0 1vw black inset;
+}
+
+.event-popup h2 {
+  font-size: 2.5vw;
+  text-shadow: 0 0 0.5vw whitesmoke;
+}
+
+.event-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+  height: 20vw;
+  overflow-y: scroll;
+  font-size: 1vw;
+  background-color: var(--bg2-color);
+  border-radius: 1vw;
+  box-shadow: 0 0 1vw black inset, 0 0 1vw black;
+  padding: 0.4vw;
+  font-family: "Readex Pro";
+}
+
+.event-text-container p {
+  font-size: 1.1vw
+}
+
+.event-buttons-container {
+  display: flex;
+  gap: 1vw;
+}
+
+.event-popup button {
+  font-size: 2vw;
+  padding: 0.5vw;
+}

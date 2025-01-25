@@ -1,0 +1,50 @@
+#resources-container, #reputations-container {
+  display: flex;
+  position: absolute;
+  width: 8vw;
+  background-color: var(--overlay-color);
+  border-radius: 1vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5vw;
+  padding: 1vw;
+  box-shadow: 0 0 1vw black, 0 0 1vw black inset;
+}
+
+#resources-container {
+  left: 2vw;
+  bottom: 2vw;
+}
+
+#reputations-container {
+  right: 2vw;
+  bottom: 2vw;
+}
+
+#resources-container h2, #reputations-container h2 {
+  font-size: 1.5vw;
+  text-align: center;
+  text-shadow: 0 0 0.3vw var(--text-color);
+}
+
+.resource-container, .reputation-container {
+  display: flex;
+  align-items: center;
+}
+
+.resource-container, .reputation-container {
+  gap: 0.5vw;
+}
+
+.reputation-container {
+  flex-direction: row-reverse;
+}
+
+.resource-container img, .reputation-container img {
+  max-width: 3.2vw;
+}
+
+.resource-container p, .reputation-container p{
+  font-size: 2vw
+}

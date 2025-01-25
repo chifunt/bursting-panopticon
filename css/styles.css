@@ -1,33 +1,17 @@
 @import "reset.css";
 @import "colors.css";
-@import "vignettes.css";
 @import "fonts.css";
+@import "base.css";
+@import "dayclock.css";
+@import "resources-reputations.css";
+@import "event.css";
 @import "markers.css";
+@import "vignettes.css";
 
 #background {
   width: 100%;
   height: 100%;
   position: absolute;
-}
-
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: "Bubbler One";
-}
-
-button {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  border: 0.15vw white solid;
-  border-radius: 1vw;
-  box-shadow: 0 0 1vw black;
-}
-
-button:hover {
-  background-color: black;
-  color: var(--oil-color);
-  border: 0.15vw solid var(--oil-color);
 }
 
 #game-container {
@@ -42,148 +26,4 @@ button:hover {
 #game-container img {
   width: 75%;
   height: auto;
-}
-
-div#daytime-container {
-  position: absolute;
-  display: flex;
-  top: 1vw;
-  left: 2vw;
-  width: 25vw;
-  flex-direction: column;
-}
-
-#game-container p {
-  text-shadow: white 0 0 0.4vw;
-}
-
-p#current-day {
-  font-size: 8vw;
-}
-
-p#current-time {
-  font-size: 4vw;
-}
-
-/* EVENT POPUP */
-
-.event-popup {
-  position: absolute;
-  height: 80%;
-  width: 40%;
-  display: flex;
-  background-color: var(--overlay-color);
-  box-shadow: 0 0 2vw black, 0 0 4vw black inset;
-  border-radius: 3vw;
-  flex-direction: column;
-  align-items: center;
-  padding: 2vw;
-  gap: 1vw;
-  border: 0.5vw solid var(--overlay-color);
-  display: none;
-}
-
-.minimize-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.minimize-container button {
-  border: 0.2vw solid var(--bg2-color);
-  padding: 0;
-}
-
-.event-popup img {
-  max-width: 40vw;
-  border-radius: 2vw;
-  box-shadow: 0.1vw 0.2vw 1vw black, 0 0 1vw black inset;
-}
-
-.event-popup h2 {
-  font-size: 2.5vw;
-  text-shadow: 0 0 0.5vw whitesmoke;
-}
-
-.event-text-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1vw;
-  height: 20vw;
-  overflow-y: scroll;
-  font-size: 1vw;
-  background-color: var(--bg2-color);
-  border-radius: 1vw;
-  box-shadow: 0 0 1vw black inset, 0 0 1vw black;
-  padding: 0.4vw;
-  font-family: "Readex Pro";
-}
-
-.event-text-container p {
-  font-size: 1.1vw
-}
-
-.event-buttons-container {
-  display: flex;
-  gap: 1vw;
-}
-
-.event-popup button {
-  font-size: 2vw;
-  padding: 0.5vw;
-}
-
-/* EVENT POPUP STYLES END */
-
-#resources-container, #reputations-container {
-  display: flex;
-  position: absolute;
-  width: 8vw;
-  background-color: var(--overlay-color);
-  border-radius: 1vw;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5vw;
-  padding: 1vw;
-  box-shadow: 0 0 1vw black, 0 0 1vw black inset;
-}
-
-#resources-container {
-  left: 2vw;
-  bottom: 2vw;
-  /* height: 20vw; */
-}
-
-#reputations-container {
-  right: 2vw;
-  bottom: 2vw;
-  /* height: 20vw; */
-}
-
-#resources-container h2, #reputations-container h2 {
-  font-size: 1.5vw;
-  text-align: center;
-  text-shadow: 0 0 0.3vw var(--text-color);
-}
-
-.resource-container, .reputation-container {
-  display: flex;
-  align-items: center;
-}
-
-.resource-container, .reputation-container {
-  gap: 0.5vw;
-}
-
-.reputation-container {
-  flex-direction: row-reverse;
-}
-
-.resource-container img, .reputation-container img {
-  max-width: 3.2vw;
-}
-
-.resource-container p, .reputation-container p{
-  font-size: 2vw
 }

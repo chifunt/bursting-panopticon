@@ -1,0 +1,16 @@
+div#daytime-container {
+  position: absolute;
+  display: flex;
+  top: 1vw;
+  left: 2vw;
+  width: 25vw;
+  flex-direction: column;
+}
+
+#current-day {
+  font-size: 8vw;
+}
+
+#current-time {
+  font-size: 4vw;
+}
