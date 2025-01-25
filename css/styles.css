@@ -1,0 +1,85 @@
+@import "reset.css";
+@import "colors.css";
+@import "vignettes.css";
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+button {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 0.1vw white solid;
+  border-radius: 1vw;
+  box-shadow: 0 0 1vw black;
+}
+
+#game-container {
+  display: flex;
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-container img {
+  width: 75%;
+  height: auto;
+}
+
+div#daytime-container {
+  position: absolute;
+  display: flex;
+  top: 1vw;
+  left: 2vw;
+  width: 25vw;
+  flex-direction: column;
+}
+
+#game-container p {
+  text-shadow: white 0 0 1vw;
+}
+
+p#current-day {
+  font-size: 8vw;
+}
+
+p#current-time {
+  font-size: 4vw;
+}
+
+.event-popup {
+  position: absolute;
+  height: 70%;
+  width: 50%;
+  display: flex;
+  background-color: var(--overlay-color);
+  box-shadow: 0 0 2vw black, 0 0 1vw black inset;
+  border-radius: 3vw;
+  flex-direction: column;
+  align-items: center;
+  padding: 2svw;
+  /* display: none; */
+  gap: 1vw;
+}
+
+.event-popup img {
+  max-width: 20vw;
+  border-radius: 2vw;
+  box-shadow: 0 0 2vw black;
+}
+
+.event-popup button {
+  padding: 0.5vw;
+}
+
+.event-text p {
+
+}
+
+.event-text {
+  overflow: scroll;
+  font-size: 1vw;
+}
