@@ -1,14 +1,14 @@
-// Events.js
+// js/events.js
 import { Utils } from './utils.js';
 import { TimeManager } from './timeManager.js';
 import { Resources } from './resources.js';
 import { Reputations } from './reputations.js';
 import { Flags } from './flags.js';
 import { LOCATION_MARKER_MAP } from './eventsLocationMap.js';
+import { AudioManager } from './audioManager.js'; // Import AudioManager
 
 export const Events = (() => {
   let eventList = [];
-
   const DEFAULT_IMAGE_SRC = 'assets/images/event-wide-sample.png';
 
   // DOM references
@@ -18,11 +18,9 @@ export const Events = (() => {
   const eventTextContainer = eventPopup.querySelector('.event-text-container');
   const eventButtonsContainer = eventPopup.querySelector('.event-buttons-container');
 
-  // 1. Load all JSON files for days 1 through 5
+  // Initialize events by loading JSON files
   const init = async () => {
     hideEventPopup();
-
-    // If you add more days, just add them here:
     const dayFiles = [
       'assets/data/day1.json',
       'assets/data/day2.json',
@@ -54,7 +52,7 @@ export const Events = (() => {
     }
   };
 
-  // 2. Transform raw JSON event to internal shape
+  // Transform raw JSON event to internal shape
   const transformJsonEvent = (jsonEvent, index, dayNumber) => {
     const id = `event-day${dayNumber}-${jsonEvent.time || 'XX:XX'}-${index}`;
     const markerId = LOCATION_MARKER_MAP[jsonEvent.location] || 'pin-capital';
@@ -74,7 +72,7 @@ export const Events = (() => {
     };
   };
 
-  // 3. Transform JSON button to internal structure
+  // Transform JSON button to internal structure
   const transformJsonButton = (jsonButton) => {
     let deductionsText = '';
 
@@ -128,7 +126,7 @@ export const Events = (() => {
     };
   };
 
-  // 4. Check dependencies (flags, resources, reputation)
+  // Check dependencies (flags, resources, reputation)
   const checkDependencies = (event) => {
     if (!event.dependencies || event.dependencies.length === 0) {
       return true;
@@ -152,21 +150,21 @@ export const Events = (() => {
     return true;
   };
 
-  // 5. Find events for a given day & time
+  // Find events for a given day & time
   const getEventByTime = (day, time) => {
     return eventList.find(
       e => e.day === day && e.time === time && !e.triggered && checkDependencies(e)
     );
   };
 
-  // 6. Find events for a marker
+  // Find events for a marker
   const getEventByMarker = (markerId) => {
     return eventList.find(
       e => e.markerId === markerId && !e.triggered && checkDependencies(e)
     );
   };
 
-  // 7. Show event popup
+  // Show event popup
   const showEvent = (event) => {
     if (event.triggered) return;
 
@@ -214,14 +212,27 @@ export const Events = (() => {
         buttonElem.classList.add('disabled-button');
       }
 
+      // Add hover sound
+      buttonElem.addEventListener('mouseenter', () => {
+        AudioManager.playSound('hover');
+      });
+
+      // Add click sound
+      buttonElem.addEventListener('click', () => {
+        AudioManager.playSound('click');
+      });
+
+      // Add the action
       buttonElem.addEventListener('click', btn.action);
       eventButtonsContainer.appendChild(buttonElem);
     });
 
-    // Play sound if provided
+    // Play event-specific sound if provided
     if (event.soundSrc) {
-      const audio = new Audio(event.soundSrc);
-      audio.play();
+      const eventSound = new Audio(event.soundSrc);
+      eventSound.play().catch(error => {
+        console.error(`Error playing event sound "${event.soundSrc}":`, error);
+      });
     }
 
     eventPopup.classList.add('visible');
@@ -229,13 +240,13 @@ export const Events = (() => {
     event.triggered = true;
   };
 
-  // 8. Hide event popup
+  // Hide event popup
   const hideEventPopup = () => {
     eventPopup.classList.remove('visible');
     Utils.log('Event popup hidden.');
   };
 
-  // 9. Marker click -> show event
+  // Marker click -> show event
   const handleMarkerEvent = (markerId) => {
     const event = getEventByMarker(markerId);
     if (event) {
@@ -245,8 +256,6 @@ export const Events = (() => {
 
   /**
    * Helper function to check if button requirements are met
-   * @param {Object} requires - The requirements object from the button
-   * @returns {Boolean} - True if all requirements are met, else false
    */
   const checkButtonRequirements = (requires) => {
     if (!requires || Object.keys(requires).length === 0) {
@@ -286,8 +295,6 @@ export const Events = (() => {
 
   /**
    * Helper function to generate a tooltip text based on unmet requirements
-   * @param {Object} requires - The requirements object from the button
-   * @returns {String} - The tooltip text explaining unmet requirements
    */
   const generateRequirementsTooltip = (requires) => {
     if (!requires || Object.keys(requires).length === 0) {

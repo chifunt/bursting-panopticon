@@ -1,0 +1,33 @@
+#menu-screen {
+  position: absolute;
+  background-color: black;
+  background-image: url("assets/images/main-menu.jpg");
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1vw;
+  font-size: 4.3vw;
+}
+
+#menu-screen h1 {
+  color: var(--air-color);
+  text-shadow: 0 0 1.4vw var(--air-color);
+}
+
+#menu-screen button {
+  padding: 1vw;
+}
+
+#menu-screen img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 80%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: -1;
+}

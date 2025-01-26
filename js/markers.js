@@ -1,4 +1,6 @@
+// js/markers.js
 import { Game } from './game.js';
+import { AudioManager } from './audioManager.js';
 
 export const Markers = (() => {
   // List of marker IDs
@@ -10,11 +12,12 @@ export const Markers = (() => {
     'pin-gas'
   ];
 
-  // Initialize all markers to be hidden and set up click listeners
+  // Initialize all markers to be hidden and set up listeners
   const init = () => {
     markers.forEach(markerId => {
       hideMarker(markerId);
       setupClickListener(markerId);
+      setupHoverListener(markerId);
     });
   };
 
@@ -25,6 +28,9 @@ export const Markers = (() => {
       marker.querySelector('.pin').style.display = 'block';
       marker.querySelector('.pulse').style.display = 'block';
       console.log(`Marker "${markerId}" is now visible.`);
+
+      // Play 'pin-appear' sound effect
+      AudioManager.playSound('pinAppear');
     } else {
       console.warn(`Marker "${markerId}" does not exist.`);
     }
@@ -42,17 +48,29 @@ export const Markers = (() => {
     }
   };
 
-  // Hide all markers
-  const hideAllMarkers = () => {
-    markers.forEach(markerId => hideMarker(markerId));
-  };
-
   // Setup click listener for a marker
   const setupClickListener = (markerId) => {
     const marker = document.getElementById(markerId);
     if (marker) {
       marker.addEventListener('click', () => {
+        // Play 'click' sound effect
+        AudioManager.playSound('click');
+
+        // Handle marker click
         handleMarkerClick(markerId);
+      });
+    } else {
+      console.warn(`Marker "${markerId}" does not exist.`);
+    }
+  };
+
+  // Setup hover listener for a marker
+  const setupHoverListener = (markerId) => {
+    const marker = document.getElementById(markerId);
+    if (marker) {
+      marker.addEventListener('mouseenter', () => {
+        // Play 'hover' sound effect
+        AudioManager.playSound('hover');
       });
     } else {
       console.warn(`Marker "${markerId}" does not exist.`);
@@ -69,6 +87,8 @@ export const Markers = (() => {
     init,
     showMarker,
     hideMarker,
-    hideAllMarkers
+    hideAllMarkers: () => {
+      markers.forEach(markerId => hideMarker(markerId));
+    }
   };
 })();
