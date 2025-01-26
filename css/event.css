@@ -105,7 +105,12 @@
   z-index: 10;
 }
 
-/* 3. Show the ::after tooltip on hover */
+.event-buttons-container button:not([data-deductions])::after,
+.event-buttons-container button[data-deductions=""]::after {
+  display: none;
+}
+
+/* Show the ::after tooltip on hover if data-deductions has text */
 .event-buttons-container button:hover::after {
   opacity: 1;
 }
