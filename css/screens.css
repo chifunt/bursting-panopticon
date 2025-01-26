@@ -1,4 +1,4 @@
-#menu-screen {
+#menu-screen, #end-screen {
   position: absolute;
   background-color: black;
   background-image: url("assets/images/main-menu.jpg");
@@ -13,16 +13,20 @@
   font-size: 4.3vw;
 }
 
+#end-screen {
+  display: none;
+}
+
 #menu-screen h1 {
   color: var(--air-color);
   text-shadow: 0 0 1.4vw var(--air-color);
 }
 
-#menu-screen button {
+#menu-screen button, #end-screen button {
   padding: 1vw;
 }
 
-#menu-screen img {
+#menu-screen img, #end-screen img {
   position: absolute;
   width: 100%;
   height: 100%;
