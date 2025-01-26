@@ -46,6 +46,7 @@
       "time": "08:00",
       "location": "The Capital",
       "image": "images/oil_delegation.jpg",
+      "sound": "assets/sounds/sfx/bubble_meeting.mp3",
       "buttons": [
         {
           "text": "Welcome the Oil Delegation Warmly",
@@ -76,6 +77,7 @@
       "time": "09:00",
       "location": "The Capital",
       "image": "images/air_delegation.jpg",
+      "sound": "assets/sounds/sfx/bubble_meeting.mp3",
       "buttons": [
         {
           "text": "Accept Their Offer of Guidance",
@@ -106,6 +108,7 @@
       "time": "10:00",
       "location": "The Capital",
       "image": "images/gas_inventors.jpg",
+      "sound": "assets/sounds/sfx/bubble_meeting.mp3",
       "buttons": [
         {
           "text": "Fund Their Research Generously",
