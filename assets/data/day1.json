@@ -1,0 +1,319 @@
+{
+  "day": 1,
+  "events": [
+    {
+      "dependencies": [],
+      "title": "The Dawn of a New Reign",
+      "text": [
+        "You awaken to the hush of anticipation across Bullospolis. In the grand marble halls of the Capital, a soft glow of morning light shimmers through translucent arches of polished bubble-film. An air of anxiety clings to every corridor, yet you sense a hopeful energy pulsating through the city’s core.",
+        "Trumpets fashioned from spiral shells blare an echoing tune as you, the newly ascended Caesar, step forth onto the balcony. Below, countless bubbles of every shape and sheen gather, their eyes fixed upon you. They are uncertain yet eager to believe in your leadership—a leadership that must guide them through the coming crisis."
+      ],
+      "time": "07:00",
+      "location": "The Capital",
+      "image": "images/caesar_coronation.jpg",
+      "sound": "sounds/crowd_cheer.ogg",
+      "buttons": [
+        {
+          "text": "Acknowledge Your New Role",
+          "outcomes": {
+            "resources": {
+              "water": 0,
+              "gas": 0,
+              "fat": 0,
+              "air": 0,
+              "oil": 0
+            },
+            "reputation": {
+              "oil": 0,
+              "air": 0,
+              "gas": 0,
+              "cavitation": 0
+            },
+            "flags": {
+              "FL_CAESAR_CROWNED": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Visitors from the Oil Region",
+      "text": [
+        "A delegation of Oil Bubbles arrives at the Capital soon after your crowning. Their shapes glisten with a shimmering black-and-brown hue, reflecting the city’s lights in a display of understated elegance. Their leader, an older Oil Bubble with a calm demeanor, presents you with a humble token: a small cask of refined oil, used in building robust new structures.",
+        "They quietly announce their desire to maintain stability and growth. In hushed tones, they also mention troubling rumors about other bubble types—whispers that resources might be withheld from them if tensions rise. They seek your assurance that the new regime will protect their rights and industry."
+      ],
+      "time": "08:00",
+      "location": "The Capital",
+      "image": "images/oil_delegation.jpg",
+      "buttons": [
+        {
+          "text": "Welcome the Oil Delegation Warmly",
+          "outcomes": {
+            "resources": {
+              "oil": 5
+            },
+            "reputation": {
+              "oil": 2,
+              "air": 0,
+              "gas": 0,
+              "cavitation": 0
+            },
+            "flags": {
+              "FL_OIL_INTRO_ACCEPTED": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Greetings from the Air Region",
+      "text": [
+        "A trio of Air Bubbles floats into the audience chamber, their translucent forms dancing lightly on subtle currents. With gentle voices, they congratulate you on your new position. Their official representative, a serene bubble named Sibilus, explains that the Air Region values harmony and philosophical unity among all bubbles.",
+        "Sibilus mentions hearing rumors that certain factions are planning to use your coronation day to sow dissent. They ask for your help in quelling any conspiracies before they can disrupt the fragile peace. The Air Bubbles offer their wisdom and counsel to maintain balance—should you be willing to listen."
+      ],
+      "time": "09:00",
+      "location": "The Capital",
+      "image": "images/air_delegation.jpg",
+      "buttons": [
+        {
+          "text": "Accept Their Offer of Guidance",
+          "outcomes": {
+            "resources": {
+              "air": 3
+            },
+            "reputation": {
+              "oil": 0,
+              "air": 2,
+              "gas": 0,
+              "cavitation": 0
+            },
+            "flags": {
+              "FL_AIR_INTRO_ACCEPTED": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "The Gas Tinkerers Arrive",
+      "text": [
+        "Suddenly, a boisterous retinue of Gas Bubbles bursts into the courtyard, their presence accentuated by tiny pops and fizzles. Among them is the esteemed Gas scientist, Professor Fizz, known for boundary-pushing experiments. They greet you with an explosion of confetti made from crystallized vapors.",
+        "The professor excitedly explains that they have new inventions in the works—contraptions they claim could revolutionize the city’s resource production. However, they need immediate funding and a portion of your resources to proceed. The Gas Bubbles radiate optimism, but there’s an undercurrent of urgency in their request."
+      ],
+      "time": "10:00",
+      "location": "The Capital",
+      "image": "images/gas_inventors.jpg",
+      "buttons": [
+        {
+          "text": "Fund Their Research Generously",
+          "requires": {
+            "resources": {
+              "water": 10,
+              "fat": 10
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "water": -10,
+              "fat": -10
+            },
+            "reputation": {
+              "gas": 3
+            },
+            "flags": {
+              "FL_GAS_EXPERIMENT_SUPPORTED": true
+            }
+          }
+        },
+        {
+          "text": "Politely Decline",
+          "outcomes": {
+            "resources": {
+              "water": 0,
+              "fat": 0
+            },
+            "reputation": {
+              "gas": -1
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Cavitation Warriors Present Arms",
+      "text": [
+        "A thunderous rumble quakes the palace floors as Cavitation Bubbles march in formation. Their leader, General Rumble, salutes you with staccato bursts of collapsing water pockets. Although they appear menacing, they are essential defenders of Bullospolis’ borders.",
+        "General Rumble reports an increase in bandit activities near the outskirts of the Cavitation Region. They want additional supplies to shore up the region’s defenses. At the same time, the general warns that too much support for the military could create distrust among the other Bubbles, who fear oppression by force."
+      ],
+      "time": "11:00",
+      "location": "The Cavitation Region",
+      "image": "images/cav_warriors.jpg",
+      "sound": "sounds/heavy_drums.ogg",
+      "buttons": [
+        {
+          "text": "Send Supplies Immediately",
+          "requires": {
+            "resources": {
+              "oil": 5,
+              "fat": 5
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "oil": -5,
+              "fat": -5
+            },
+            "reputation": {
+              "cavitation": 3
+            },
+            "flags": {
+              "FL_CAV_TROOP_WARNING_ISSUED": true
+            }
+          }
+        },
+        {
+          "text": "Hold Off for Now",
+          "outcomes": {
+            "resources": {
+              "oil": 0,
+              "fat": 0
+            },
+            "reputation": {
+              "cavitation": -1
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "A Whisper of Conspiracy",
+      "text": [
+        "Late in the afternoon, your advisor quietly informs you of suspicious activities in the darker corners of the Capital. A masked messenger was seen exchanging coded documents with unknown parties from multiple regions. Some suspect this could be part of a coup or a plan to sabotage resource distribution.",
+        "Rumors among the populace run rampant. Fear and paranoia begin to bubble up, threatening to erode the unity of Bullospolis. Should you investigate these rumors and risk stoking them further, or let the rumors die quietly, hoping no real threat exists?"
+      ],
+      "time": "14:00",
+      "location": "The Capital",
+      "image": "images/conspiracy_whisper.jpg",
+      "buttons": [
+        {
+          "text": "Launch a Quiet Investigation",
+          "outcomes": {
+            "resources": {
+              "water": -5
+            },
+            "reputation": {
+              "air": 1,
+              "gas": -1,
+              "cavitation": 1
+            },
+            "flags": {
+              "FL_CAPITAL_RUMOR_DISCOVERED": true
+            }
+          }
+        },
+        {
+          "text": "Ignore the Rumors for Now",
+          "outcomes": {
+            "resources": {
+              "water": 0
+            },
+            "reputation": {
+              "air": -1,
+              "gas": 0,
+              "cavitation": 0
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Oracle’s First Vision",
+      "text": [
+        "Shortly before dusk, an enigmatic Air Bubble known as The Oracle requests an audience. With eyes swirling in colors never before seen, it proclaims a vision of a meteor shower threatening to strike the outer regions. The Oracle’s voice resonates with an otherworldly echo, leaving courtiers breathless.",
+        "The message is cryptic: 'Five days to endure. Strength tested by fire from the heavens. Spare not your vigilance, for decisions weigh heavier than the stars.' Some dismiss this as theatrics; others believe wholeheartedly. Which stance will you take in front of your people?"
+      ],
+      "time": "16:00",
+      "location": "The Capital",
+      "image": "images/oracle_vision.jpg",
+      "buttons": [
+        {
+          "text": "Heed the Oracle’s Warning Publicly",
+          "outcomes": {
+            "resources": {
+              "air": -3
+            },
+            "reputation": {
+              "air": 2,
+              "gas": 1,
+              "cavitation": 0
+            },
+            "flags": {
+              "FL_AIR_CONSPIRACY_HEARD": true
+            }
+          }
+        },
+        {
+          "text": "Dismiss the Oracle’s Prophecy",
+          "outcomes": {
+            "resources": {
+              "air": 0
+            },
+            "reputation": {
+              "air": -2,
+              "gas": 0,
+              "cavitation": 1
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_CAESAR_CROWNED",
+          "value": true
+        }
+      ],
+      "title": "Nightfall in the Capital",
+      "text": [
+        "As darkness settles over Bullospolis, lanterns flicker in the Capital’s winding streets. Each district hums with rumors, some praising your swift actions, others whispering doubts about your readiness. Patrols roam the avenues to maintain peace, but an undercurrent of anxiety still simmers.",
+        "You retire to your chambers, aware that the next days will demand every ounce of wisdom and resolve. Outside your window, a faint streak of light crosses the sky—a possible herald of the dangers foretold by the Oracle. The future of Bullospolis lies in your hands."
+      ],
+      "time": "20:00",
+      "location": "The Capital",
+      "image": "images/nightfall_capital.jpg",
+      "buttons": [
+        {
+          "text": "Retire for the Evening",
+          "outcomes": {
+            "resources": {
+              "water": 0,
+              "gas": 0,
+              "fat": 0,
+              "air": 0,
+              "oil": 0
+            },
+            "reputation": {
+              "oil": 0,
+              "air": 0,
+              "gas": 0,
+              "cavitation": 0
+            },
+            "flags": {}
+          }
+        }
+      ]
+    }
+  ]
+}

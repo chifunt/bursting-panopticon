@@ -1,0 +1,393 @@
+{
+  "day": 3,
+  "events": [
+    {
+      "dependencies": [],
+      "title": "Dawn of Fire and Stone",
+      "text": [
+        "Morning light reveals ominous trails across the sky, streaks of incandescent fire heralding the meteors’ arrival. Alarm bells echo through the Capital’s corridors and out into the surrounding lands. There is no more denying the Oracle’s warnings—crisis has taken physical form.",
+        "Courtiers rush to your side, reports of preliminary strikes flooding in from the outskirts. You must act quickly to coordinate relief and manage resources. Yet there are more disasters to come; this is only the beginning."
+      ],
+      "time": "06:00",
+      "location": "The Capital",
+      "image": "images/dawn_meteor.jpg",
+      "sound": "sounds/alarm_bell.ogg",
+      "buttons": [
+        {
+          "text": "Acknowledge the Crisis",
+          "outcomes": {
+            "resources": {},
+            "reputation": {},
+            "flags": {
+              "FL_CRISIS_BEGINS": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_GAS_PROTOTYPE_FUNDED",
+          "value": true
+        }
+      ],
+      "title": "Operation: Meteor Dissipator",
+      "text": [
+        "Professor Fizz and a team of Gas Bubbles scramble to deploy the Meteor Dissipator. The newly built contraption shudders as they hoist it toward an elevated platform outside the Gas Region. Streams of flammable vapor swirl in the device’s core, ready to disrupt smaller meteor fragments.",
+        "Though hope flickers in their eyes, each launch of the device consumes extra resources. A single miscalculation could cause it to fail catastrophically. Will you stand behind them, or limit the risk in favor of saving resources for other efforts?"
+      ],
+      "time": "07:00",
+      "location": "The Gas Region",
+      "image": "images/gas_dissipator.jpg",
+      "buttons": [
+        {
+          "text": "Authorize Full Deployment",
+          "requires": {
+            "resources": {
+              "gas": 5,
+              "fat": 5
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "gas": -5,
+              "fat": -5
+            },
+            "reputation": {
+              "gas": 2
+            },
+            "flags": {
+              "FL_METEOR_DISSIPATOR_DEPLOYED": true
+            }
+          }
+        },
+        {
+          "text": "Hold Back to Conserve Resources",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "gas": -2
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_GAS_PROTOTYPE_FUNDED",
+          "value": false
+        }
+      ],
+      "title": "Meteor Strikes Without the Dissipator",
+      "text": [
+        "Explosions rattle the horizon as the Gas Bubbles watch helplessly. Without a working prototype, they can only scramble to find makeshift defenses. Their once-bright confidence now flickers with regret and desperation.",
+        "Across Bullospolis, meteor fragments hammer the landscape. Some question if the city might have been better prepared had the Gas Bubbles’ project seen the light of day. Tensions flare as blame is passed around like a hot ember."
+      ],
+      "time": "07:00",
+      "location": "The Gas Region",
+      "image": "images/meteor_strike.jpg",
+      "buttons": [
+        {
+          "text": "Mourn the Missed Opportunity",
+          "outcomes": {
+            "resources": {
+              "gas": -3
+            },
+            "reputation": {
+              "gas": -2
+            },
+            "flags": {
+              "FL_NO_DISSIPATOR_BUILT": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_OIL_FORTIFIED",
+          "value": true
+        }
+      ],
+      "title": "Oil Region Under Siege",
+      "text": [
+        "Meteor fragments pound the Oil Region’s newly reinforced structures. Thanks to the fortifications approved on the previous day, granaries and resource depots withstand the initial impacts. Though shaken, the region remains largely intact—an early triumph in the face of disaster.",
+        "However, rumors abound that some regions feel neglected, believing you favored the Oil Bubbles. Morale in other districts wavers, casting doubts on whether your decisions benefit everyone or only a privileged few."
+      ],
+      "time": "09:00",
+      "location": "The Oil Region",
+      "image": "images/oil_fortified.jpg",
+      "buttons": [
+        {
+          "text": "Acknowledge Their Resilience",
+          "outcomes": {
+            "resources": {
+              "oil": 5
+            },
+            "reputation": {
+              "oil": 2,
+              "air": -1,
+              "gas": 0,
+              "cavitation": -1
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_OIL_FORTIFIED",
+          "value": false
+        }
+      ],
+      "title": "Widespread Devastation in Oil Region",
+      "text": [
+        "Anxious cries echo across the Oil Region as unfortified buildings crumble under meteoric impact. Oil-based structures collapse in spectacular fashion, scattering precious resources and injuring countless citizens.",
+        "Desperate messages arrive at your palace, pleading for assistance to rebuild. However, your resources are stretched thin by the crisis, and some wonder if it’s already too late to rescue the Oil Region from ruin."
+      ],
+      "time": "09:00",
+      "location": "The Oil Region",
+      "image": "images/oil_devastation.jpg",
+      "buttons": [
+        {
+          "text": "Send Emergency Aid",
+          "requires": {
+            "resources": {
+              "water": 5,
+              "fat": 5
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "water": -5,
+              "fat": -5
+            },
+            "reputation": {
+              "oil": 2
+            },
+            "flags": {
+              "FL_OIL_EMERGENCY_AID_SENT": true
+            }
+          }
+        },
+        {
+          "text": "Too Risky to Spare Resources",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "oil": -2
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_CONSPIRACY_EXPOSED",
+          "value": true
+        }
+      ],
+      "title": "Conspirators Strike Back",
+      "text": [
+        "As meteors slam into outer districts, the conspirators—exposed but not yet defeated—launch a desperate plan. Small teams infiltrate supply lines, seeking to disrupt any relief efforts. Chaos is their best ally, hoping to topple your rule amid the swirling panic.",
+        "Courtiers and loyal soldiers battle these saboteurs in the Capital’s streets. Victory is possible, but each skirmish drains manpower and resources. Will you direct critical aid toward quelling the conspiracy, or focus on shielding the populace from falling debris?"
+      ],
+      "time": "11:00",
+      "location": "The Capital",
+      "image": "images/conspiracy_sabotage.jpg",
+      "buttons": [
+        {
+          "text": "Focus on Stopping the Saboteurs",
+          "requires": {
+            "resources": {
+              "cavitation": 0
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "water": -5
+            },
+            "reputation": {
+              "cavitation": 2
+            },
+            "flags": {
+              "FL_CONSPIRACY_SUPPRESSED": true
+            }
+          }
+        },
+        {
+          "text": "Prioritize Meteor Defense",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "cavitation": -2,
+              "air": 1
+            },
+            "flags": {
+              "FL_CONSPIRACY_GAINS_GROUND": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_CONSPIRACY_STILL_COVERT",
+          "value": true
+        }
+      ],
+      "title": "Covert Sabotage Discovered Too Late",
+      "text": [
+        "In the midst of chaos, your advisors uncover evidence that unseen hands have been quietly undermining relief efforts. Key supply routes collapse, and several wagons of medical supplies vanish without a trace. The conspirators’ covert operation thrives while Bullospolis is distracted by the falling sky.",
+        "Some suspect you withheld vital information from the public to keep panic at bay. Now, that secrecy is costing precious lives. The city’s morale falters as trust in the palace erodes. A reckoning seems inevitable."
+      ],
+      "time": "11:00",
+      "location": "The Capital",
+      "image": "images/covert_sabotage.jpg",
+      "buttons": [
+        {
+          "text": "Announce a Crackdown",
+          "outcomes": {
+            "resources": {
+              "water": -2
+            },
+            "reputation": {
+              "air": -1,
+              "cavitation": 2
+            },
+            "flags": {
+              "FL_CONSPIRACY_CRACKDOWN": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Aid for the Air Region",
+      "text": [
+        "Air Bubbles gather in prayer circles, battered by meteor fragments. Though they are light and float above some destruction, many have still been struck, leaving them drained and frightened. Their leaders request healing supplies and perhaps a protective dome to safeguard them from further impacts.",
+        "However, your coffers dwindle. Offering them resources means ignoring other pleas for help. The fragile sense of unity in Bullospolis could shatter if you fail to balance the demands of each region. Still, the Air Region’s calm presence may prove invaluable if you manage to save them from despair."
+      ],
+      "time": "13:00",
+      "location": "The Air Region",
+      "image": "images/air_region_aid.jpg",
+      "buttons": [
+        {
+          "text": "Provide the Dome and Supplies",
+          "requires": {
+            "resources": {
+              "water": 5,
+              "air": 5
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "water": -5,
+              "air": -5
+            },
+            "reputation": {
+              "air": 3
+            },
+            "flags": {}
+          }
+        },
+        {
+          "text": "Prioritize Other Regions",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "air": -2
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Emergency Call from Cavitation Forces",
+      "text": [
+        "General Rumble sends out an urgent missive: a particularly large meteor has splintered into multiple chunks, threatening critical water channels near the Cavitation Region. If these channels are destroyed, the city’s water supply could be severely compromised.",
+        "But directing help to the Cavitation Region may require diverting resources from other crisis areas, risking further casualties there. Soldiers clamor for your support, yet you can’t save everyone. The time for easy decisions has passed."
+      ],
+      "time": "15:00",
+      "location": "The Cavitation Region",
+      "image": "images/cavitation_alert.jpg",
+      "buttons": [
+        {
+          "text": "Rush Reinforcements",
+          "requires": {
+            "resources": {
+              "water": 5,
+              "oil": 5
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "water": -5,
+              "oil": -5
+            },
+            "reputation": {
+              "cavitation": 3
+            },
+            "flags": {
+              "FL_WATER_CHANNELS_SAVED": true
+            }
+          }
+        },
+        {
+          "text": "Stand Down; Conserve Assets",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "cavitation": -3
+            },
+            "flags": {
+              "FL_WATER_CHANNELS_DESTROYED": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Nightfall of Grim Realities",
+      "text": [
+        "As the sun sets, the once-vibrant cityscape lies scorched and fractured. Smoke and dust haze the horizon. Across Bullospolis, some regions cling to life through hastily built defenses, while others reel from devastating losses. Uncertain cries echo in half-ruined streets.",
+        "In your chambers, you review the day’s toll. Bubbles have burst, resources have dwindled, and rumors of conspiracies persist. Yet the crisis has only begun to peak. What you do next will determine how many can still be saved in the days ahead."
+      ],
+      "time": "20:00",
+      "location": "The Capital",
+      "image": "images/nightfall_crisis.jpg",
+      "sound": "sounds/dramatic_underscore.ogg",
+      "buttons": [
+        {
+          "text": "End Day 3",
+          "outcomes": {
+            "resources": {},
+            "reputation": {},
+            "flags": {
+              "FL_DAY3_ENDED": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,434 @@
+{
+  "day": 5,
+  "events": [
+    {
+      "dependencies": [],
+      "title": "Dawn of Aftermath",
+      "text": [
+        "As the fifth day breaks, the roar of meteors slowly fades to distant rumbles. Throughout Bullospolis, battered regions stir with a mixture of relief and dread. While the worst of the storm appears over, the devastation left behind is overwhelming.",
+        "Survivors sift through rubble in search of loved ones, and exhausted soldiers slump by half-toppled walls. All eyes shift to you, Caesar, for guidance on how to restore what remains of this fractured land."
+      ],
+      "time": "06:00",
+      "location": "The Capital",
+      "image": "images/day5_dawn.jpg",
+      "buttons": [
+        {
+          "text": "Face the New Day",
+          "outcomes": {
+            "resources": {},
+            "reputation": {},
+            "flags": {
+              "FL_DAY5_BEGINS": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_DISSIPATOR_REPAIRED",
+          "value": true
+        }
+      ],
+      "title": "Dissipator Successes & Casualties",
+      "text": [
+        "Professor Fizz reports the Meteor Dissipator finally overheated during the night, but not before diverting countless smaller fragments from the city. Many Gas Bubbles hail you as a visionary for trusting in their invention, though the cost in resources was great.",
+        "Engineers believe the device can be repurposed to aid in post-crisis clean-up—if further funding is available. Others argue that immediate relief for homeless Bubbles might be a better use of precious resources."
+      ],
+      "time": "08:00",
+      "location": "The Gas Region",
+      "image": "images/dissipator_after.jpg",
+      "buttons": [
+        {
+          "text": "Fund Conversion into Clean-up Tool",
+          "requires": {
+            "resources": {
+              "gas": 5,
+              "fat": 5
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "gas": -5,
+              "fat": -5
+            },
+            "reputation": {
+              "gas": 2
+            },
+            "flags": {
+              "FL_DISSIPATOR_CONVERTED": true
+            }
+          }
+        },
+        {
+          "text": "Spend Resources on Direct Humanitarian Aid",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "gas": -1,
+              "air": 2,
+              "oil": 1
+            },
+            "flags": {
+              "FL_DISSIPATOR_ABANDONED": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_AIR_SHIELD_CREATED",
+          "value": true
+        }
+      ],
+      "title": "Air Shield Saves Thousands",
+      "text": [
+        "Beneath the remnants of the meteor storm, the Air Region’s protective shield held firm through Day 4, sparing thousands from lethal debris. Even now, many Air Bubbles rest safely in the dome’s cocoon, grateful for your decision to bolster their defenses.",
+        "Yet the shield is draining resources every hour it remains active. Sibilus suggests lowering it now that the meteors have mostly ceased, redirecting resources to rescue operations in other districts still shrouded by rubble."
+      ],
+      "time": "09:00",
+      "location": "The Air Region",
+      "image": "images/air_shield_morning.jpg",
+      "buttons": [
+        {
+          "text": "Disband the Shield for Recovery Efforts",
+          "outcomes": {
+            "resources": {
+              "air": 5
+            },
+            "reputation": {
+              "air": 1
+            },
+            "flags": {
+              "FL_AIR_SHIELD_DISBANDED": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_CAPITAL_DEFENDED",
+          "value": true
+        }
+      ],
+      "title": "The Capital Stands… Barely",
+      "text": [
+        "Your firm stance on defense in the Capital has kept the city center from total collapse. Torn banners still flap over battered ramparts, but the people within those walls remain alive to see a new sunrise. Across the city, displaced Bubbles gather, seeking refuge behind what fortifications remain.",
+        "Some hail you as a protector, while others bitterly note the ruin that befell their distant homes. Rebuilding now presents a monumental challenge—do you tighten control over the Capital and direct all resources there, or seek to unify all regions in a common reconstruction plan?"
+      ],
+      "time": "10:00",
+      "location": "The Capital",
+      "image": "images/capital_defended_day5.jpg",
+      "buttons": [
+        {
+          "text": "Establish a City-Centric Rebuild",
+          "requires": {
+            "resources": {
+              "oil": 5
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "oil": -5
+            },
+            "reputation": {
+              "air": -1,
+              "gas": -1,
+              "oil": 1,
+              "cavitation": 2
+            },
+            "flags": {
+              "FL_CAPITAL_FIRST_POLICY": true
+            }
+          }
+        },
+        {
+          "text": "Push for a Unified Rebuild",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "oil": 0,
+              "air": 1,
+              "gas": 1,
+              "cavitation": 1
+            },
+            "flags": {
+              "FL_UNIFIED_REBUILD_POLICY": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Cavitation Generals Demand Order",
+      "text": [
+        "A faction of Cavitation officers, shaken by days of chaos, proposes immediate martial law to quell lingering bandit raids and looting in ravaged districts. They claim a strong hand now will restore confidence quickly and protect vital resources from opportunists.",
+        "On the other hand, civilians across all bubble types are wary of living under a militarized regime—especially with conspiratorial rumors still lingering. Is the path to security paved by might, or by renewed trust among the people?"
+      ],
+      "time": "12:00",
+      "location": "The Cavitation Region",
+      "image": "images/cavitation_martial_law.jpg",
+      "buttons": [
+        {
+          "text": "Impose Martial Law Temporarily",
+          "outcomes": {
+            "resources": {
+              "fat": -5
+            },
+            "reputation": {
+              "cavitation": 3,
+              "air": -2,
+              "gas": -1,
+              "oil": 0
+            },
+            "flags": {
+              "FL_MARTIAL_LAW_IMPOSED": true
+            }
+          }
+        },
+        {
+          "text": "Decline Military Rule",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "cavitation": -2,
+              "air": 2
+            },
+            "flags": {
+              "FL_MARTIAL_LAW_REJECTED": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_INSURRECTION_CRUSHED",
+          "value": true
+        }
+      ],
+      "title": "Aftermath of the Insurrection",
+      "text": [
+        "With the conspirators’ open rebellion stamped out, the surviving populace yearns for a return to stability. Wary glances remain, however, as stories of brutal crackdowns spread. Many wonder whether your iron fist might someday turn on them, too.",
+        "Still, the momentary peace allows rescue teams to fan out into the hardest-hit districts. There’s a delicate balance: will you continue to rule with a tight grip, or reassure people that a gentler approach will guide Bullospolis forward?"
+      ],
+      "time": "13:00",
+      "location": "The Capital",
+      "image": "images/insurrection_aftermath.jpg",
+      "buttons": [
+        {
+          "text": "Solidify Power for Future Security",
+          "outcomes": {
+            "resources": {
+              "fat": -2
+            },
+            "reputation": {
+              "cavitation": 2,
+              "air": -1,
+              "gas": 0,
+              "oil": 0
+            },
+            "flags": {
+              "FL_TIGHTER_RULE": true
+            }
+          }
+        },
+        {
+          "text": "Show Mercy and Rebuild Trust",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "cavitation": -1,
+              "air": 2,
+              "gas": 1,
+              "oil": 0
+            },
+            "flags": {
+              "FL_MERCIFUL_RULE": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_INSURRECTION_NEGOTIATION",
+          "value": true
+        }
+      ],
+      "title": "Fragile Peace Talks",
+      "text": [
+        "Negotiations with remnants of the conspiracy are fraught. Some lay down arms, tired of bloodshed, while radicals still push for a new regime. Many Bubbles simply want an end to violence so they can rebuild their shattered lives.",
+        "Moderate conspirators propose a power-sharing agreement: if you grant them some political voice, they’ll assist in reconstruction. Hardliners in your council recoil at the notion of rewarding treason. The decision falls to you."
+      ],
+      "time": "13:00",
+      "location": "The Capital",
+      "image": "images/fragile_peace_talks.jpg",
+      "buttons": [
+        {
+          "text": "Grant Limited Power to Conspirators",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "air": 2,
+              "oil": -1,
+              "cavitation": -1,
+              "gas": 1
+            },
+            "flags": {
+              "FL_POWER_SHARING_DEAL": true
+            }
+          }
+        },
+        {
+          "text": "Refuse All Demands",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "air": -1,
+              "oil": 2,
+              "cavitation": 1,
+              "gas": -1
+            },
+            "flags": {
+              "FL_NO_DEAL_WITH_CONSPIRATORS": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Final Twilight",
+      "text": [
+        "Shadows grow long as the fifth day wanes, casting a red-orange glow over Bullospolis. Survivors huddle in battered districts or in lines for meager rations. Generals stand by for orders, while architects debate the first steps to rebuilding. An uneasy calm settles; the worst of the meteors has passed.",
+        "Your choices have shaped who remains and who is lost, how resources were spent, and which alliances hold—or lie broken. As night descends, the city looks to you for one last address, anticipating the final outcome of this crisis-laden saga."
+      ],
+      "time": "20:00",
+      "location": "The Capital",
+      "image": "images/day5_twilight.jpg",
+      "buttons": [
+        {
+          "text": "Deliver Your Final Decree",
+          "outcomes": {
+            "resources": {},
+            "reputation": {},
+            "flags": {
+              "FL_DAY5_ENDED": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "endings": [
+    {
+      "dependencies": [
+        {
+          "type": "resource",
+          "resource": "water",
+          "operator": ">=",
+          "value": 20
+        },
+        {
+          "type": "resource",
+          "resource": "oil",
+          "operator": ">=",
+          "value": 15
+        },
+        {
+          "type": "reputation",
+          "faction": "air",
+          "operator": ">=",
+          "value": 5
+        },
+        {
+          "type": "flag",
+          "name": "FL_CONSPIRACY_SUPPRESSED",
+          "value": true
+        }
+      ],
+      "title": "A Golden Dawn for Bullospolis",
+      "text": [
+        "Against all odds, you steered Bullospolis through the storm with skill and compassion. The destructive meteors have ceased, leaving a wounded but united city. Resources, though tested, remain sufficient to seed a new age of prosperity.",
+        "In recognition of your benevolent rule and strategic brilliance, all Bubble types—Oil, Air, Gas, and Cavitation—rally behind you. Diplomats and scholars convene to reshape the future. These times will be remembered as the birth of a golden era, forged by sacrifice and guided by wisdom."
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "resource",
+          "resource": "water",
+          "operator": "<",
+          "value": 5
+        },
+        {
+          "type": "resource",
+          "resource": "air",
+          "operator": "<",
+          "value": 5
+        }
+      ],
+      "title": "The Great Collapse",
+      "text": [
+        "Hope runs dry as Water and Air supplies dwindle to critical levels. Thousands lie scattered in the dust and debris, parched and suffocating. Even the bravest hearts struggle to fend off despair.",
+        "Without the basic resources needed to sustain life, Bullospolis dissolves into chaos. Survivors scatter, seeking shelter far beyond the city’s domain. The once-proud capital stands as a monument to ambition, undone by catastrophe and the tyranny of chance."
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_MARTIAL_LAW_IMPOSED",
+          "value": true
+        },
+        {
+          "type": "reputation",
+          "faction": "cavitation",
+          "operator": ">=",
+          "value": 5
+        }
+      ],
+      "title": "Reign of the Iron Bubble",
+      "text": [
+        "In the final hours of the meteor crisis, you granted sweeping authority to the Cavitation forces. Under martial law, the city was wrested from the brink of anarchy—yet the cost in personal freedoms grows with every passing day.",
+        "As the meteors relent, the Cavitation military cements its hold. Streets remain under curfew, and dissent is swiftly silenced. Bullospolis recovers behind iron discipline. Many Bubbles breathe relief at the order, while others whisper of the final death of liberty."
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_POWER_SHARING_DEAL",
+          "value": true
+        }
+      ],
+      "title": "A Compromise for Survival",
+      "text": [
+        "When the meteors finally ceased, you stood beside the moderate conspirators to forge an unprecedented power-sharing accord. Though tensions remain, this gesture of unity grants respite to a weary populace. In exchange, conspirators shift their energies to reconstruction.",
+        "Walls are slowly rebuilt, fields replanted, and fewer Bubbles look over their shoulders in fear. The process of healing may be long, yet you have lit a path of compromise. In the new halls of leadership, voices of all bubble types—and once-renegade factions—begin shaping a shared future."
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Seeds of an Uncertain Tomorrow",
+      "text": [
+        "The last meteors fade, leaving Bullospolis scarred and exhausted. Resources teeter on the brink, conspirators remain at large or in hiding, and the population is divided over your leadership. Nonetheless, enough have survived to attempt rebuilding some semblance of civilization.",
+        "There is no grand victory celebration—only solemn reflection. The city might endure in some diminished form, or collapse under its accumulated wounds. Either way, your reign becomes a cautionary tale of how close the city came to utter annihilation... and how fragile unity can be in the face of cosmic tragedy."
+      ]
+    }
+  ]
+}

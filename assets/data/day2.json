@@ -1,0 +1,413 @@
+{
+  "day": 2,
+  "events": [
+    {
+      "dependencies": [],
+      "title": "Morning Assembly at the Capital",
+      "text": [
+        "The second dawn under your rule breaks with a tense hush. In the council hall, representatives from all regions gather for an urgent assembly. The echo of hurried footsteps and hushed whispers highlights the growing anxiety: the meteor shower foretold by the Oracle seems closer than ever.",
+        "You sense the weight of expectation in the air. Each bubble type eyes the others warily—some question your preparedness, while others look to you as the key to their survival. At the head of the table, you take a breath, aware that today’s decisions may be the difference between order and chaos."
+      ],
+      "time": "07:00",
+      "location": "The Capital",
+      "image": "images/council_assembly.jpg",
+      "sound": "sounds/thrumming_tension.ogg",
+      "buttons": [
+        {
+          "text": "Call the Assembly to Order",
+          "outcomes": {
+            "resources": {
+              "water": 0,
+              "gas": 0,
+              "fat": 0,
+              "air": 0,
+              "oil": 0
+            },
+            "reputation": {
+              "oil": 0,
+              "air": 0,
+              "gas": 0,
+              "cavitation": 0
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_AIR_CONSPIRACY_HEARD",
+          "value": true
+        }
+      ],
+      "title": "Vindication of the Oracle",
+      "text": [
+        "Sibilus, the Air Bubble envoy, approaches you quietly. Their eyes reflect both concern and relief at the dawning realization that the Oracle’s words may have been true all along. Around them, a handful of Air Bubbles kneel in whispered prayer, hoping to placate whatever cosmic forces loom overhead.",
+        "They urge you to form a specialized committee to coordinate preparations for the meteor threat, offering Air Region resources in exchange for a public acknowledgment of the Oracle’s wisdom. Other factions, wary of superstition, demand hard proof before committing to any further action."
+      ],
+      "time": "08:00",
+      "location": "The Capital",
+      "image": "images/oracle_vindication.jpg",
+      "buttons": [
+        {
+          "text": "Form the Meteor Defense Committee",
+          "outcomes": {
+            "resources": {
+              "air": -5
+            },
+            "reputation": {
+              "air": 2,
+              "gas": 0,
+              "oil": 0,
+              "cavitation": 0
+            },
+            "flags": {
+              "FL_DEFENSE_COMMITTEE_FORMED": true
+            }
+          }
+        },
+        {
+          "text": "Demand Further Evidence First",
+          "outcomes": {
+            "resources": {
+              "air": 0
+            },
+            "reputation": {
+              "air": -2,
+              "gas": 1,
+              "oil": 0,
+              "cavitation": 0
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_AIR_CONSPIRACY_HEARD",
+          "value": false
+        }
+      ],
+      "title": "Growing Unrest about the Oracle’s Silence",
+      "text": [
+        "A noticeable void hangs in the air as rumors of the Oracle’s supposed vision swirl, yet the Oracle remains conspicuously absent from public view. Citizens grow uneasy, speculating whether the prophecy was nothing more than a ploy to manipulate resources. Some older Air Bubbles insist the Oracle never lies, further clouding the discussion.",
+        "Officials from other regions confront you, demanding a clear stance. They suggest more practical preparations, citing bandit threats and structural vulnerabilities. Even without official confirmation, the specter of a looming disaster tightens the city’s collective nerves."
+      ],
+      "time": "08:00",
+      "location": "The Capital",
+      "image": "images/oracle_absent.jpg",
+      "buttons": [
+        {
+          "text": "Encourage Practical Preparations",
+          "outcomes": {
+            "resources": {
+              "air": -2
+            },
+            "reputation": {
+              "air": 0,
+              "gas": 1,
+              "oil": 1,
+              "cavitation": 0
+            },
+            "flags": {
+              "FL_PREP_PRACTICAL": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_GAS_EXPERIMENT_SUPPORTED",
+          "value": true
+        }
+      ],
+      "title": "Gas Bubbles’ New Prototype",
+      "text": [
+        "Professor Fizz bounds into your chambers, eyes sparkling with excitement. Thanks to the funding granted the previous day, the Gas Bubbles have constructed a prototype ‘Meteor Dissipator’—a device that, if deployed at high altitude, might disperse or weaken smaller meteors before impact.",
+        "To complete testing, they request additional resources. Several courtiers murmur concern over the risk of funneling yet more vital supplies into an unproven invention, while the Gas Bubbles remain confident it’s the best shot at mitigating damage to the city."
+      ],
+      "time": "10:00",
+      "location": "The Gas Region",
+      "image": "images/gas_prototype.jpg",
+      "buttons": [
+        {
+          "text": "Double Down on the Invention",
+          "requires": {
+            "resources": {
+              "fat": 10,
+              "gas": 5
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "fat": -10,
+              "gas": -5
+            },
+            "reputation": {
+              "gas": 2
+            },
+            "flags": {
+              "FL_GAS_PROTOTYPE_FUNDED": true
+            }
+          }
+        },
+        {
+          "text": "Refuse Additional Resources",
+          "outcomes": {
+            "resources": {
+              "fat": 0,
+              "gas": 0
+            },
+            "reputation": {
+              "gas": -2
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_GAS_EXPERIMENT_SUPPORTED",
+          "value": false
+        }
+      ],
+      "title": "Gas Bubbles Plea",
+      "text": [
+        "Word spreads through Bullospolis that the Gas Bubbles never received the funding they requested. They now approach you again, somewhat more humble, bearing sketches of a potential device they claim could break up smaller meteor fragments. Their earlier exuberance has dimmed, replaced by anxious desperation.",
+        "The Gas Bubbles insist that their innovation could be the key to survival—if only you would trust them. Other factions remain skeptical, especially after seeing no tangible results from the Gas Bubbles so far."
+      ],
+      "time": "10:00",
+      "location": "The Gas Region",
+      "image": "images/gas_inventors_papers.jpg",
+      "buttons": [
+        {
+          "text": "Allocate Resources Now",
+          "requires": {
+            "resources": {
+              "fat": 15,
+              "gas": 5
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "fat": -15,
+              "gas": -5
+            },
+            "reputation": {
+              "gas": 2
+            },
+            "flags": {
+              "FL_GAS_PROTOTYPE_FUNDED": true
+            }
+          }
+        },
+        {
+          "text": "Still No Resources to Spare",
+          "outcomes": {
+            "resources": {
+              "fat": 0,
+              "gas": 0
+            },
+            "reputation": {
+              "gas": -2
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Oil Region’s Fortification Request",
+      "text": [
+        "Builders and farmers from the Oil Region petition you for permission to reinforce key infrastructure. Their thick, lustrous bodies shine with determination. With the threat of falling meteors, they fear that existing structures—granaries, protective walls, and resource depots—could be obliterated.",
+        "However, these reinforcements require significant amounts of oil and fat. The Oil Bubbles argue that well-fortified storehouses will save precious supplies in the likely event of meteor fallout. Yet some factions worry that concentrating defenses in the Oil Region will foster resentment elsewhere."
+      ],
+      "time": "12:00",
+      "location": "The Oil Region",
+      "image": "images/oil_fortification.jpg",
+      "buttons": [
+        {
+          "text": "Approve Reinforcements",
+          "requires": {
+            "resources": {
+              "oil": 10,
+              "fat": 10
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "oil": -10,
+              "fat": -10
+            },
+            "reputation": {
+              "oil": 2,
+              "air": 0,
+              "gas": 0,
+              "cavitation": -1
+            },
+            "flags": {
+              "FL_OIL_FORTIFIED": true
+            }
+          }
+        },
+        {
+          "text": "Deny Their Request",
+          "outcomes": {
+            "resources": {
+              "oil": 0,
+              "fat": 0
+            },
+            "reputation": {
+              "oil": -2,
+              "cavitation": 1
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_CAPITAL_RUMOR_DISCOVERED",
+          "value": true
+        }
+      ],
+      "title": "Clues from the Conspirators",
+      "text": [
+        "Your undercover investigation from Day 1 yields new intel: partial documents indicating that an underground faction aims to sabotage protective measures so they can seize power amid the chaos. Handwriting analyses suggest involvement of at least one influential figure from each region, though the specifics are murky.",
+        "You could unveil these findings publicly, rallying Bullospolis against a common enemy—yet risking panic. Alternatively, you might continue the covert operation, hoping to gather undeniable proof. Tensions run high, and trust is in short supply."
+      ],
+      "time": "14:00",
+      "location": "The Capital",
+      "image": "images/conspiracy_documents.jpg",
+      "buttons": [
+        {
+          "text": "Expose the Plot Publicly",
+          "outcomes": {
+            "resources": {
+              "water": 0
+            },
+            "reputation": {
+              "air": 1,
+              "gas": -1,
+              "oil": -1,
+              "cavitation": 1
+            },
+            "flags": {
+              "FL_CONSPIRACY_EXPOSED": true
+            }
+          }
+        },
+        {
+          "text": "Keep Investigating Secretly",
+          "outcomes": {
+            "resources": {
+              "water": -3
+            },
+            "reputation": {
+              "air": 0,
+              "gas": 0,
+              "oil": 0,
+              "cavitation": 0
+            },
+            "flags": {
+              "FL_CONSPIRACY_STILL_COVERT": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Heightened Military Exercises",
+      "text": [
+        "General Rumble of the Cavitation Bubbles has ordered extensive military drills across the outskirts of Bullospolis. Soldiers train relentlessly, honing their explosive bursts in anticipation of meteor debris or any opportunistic raids that might follow.",
+        "Cavitation Bubbles request that you personally attend a demonstration, showing solidarity with the military. However, constant military displays risk stoking fears among the populace that martial law might be imminent."
+      ],
+      "time": "15:00",
+      "location": "The Cavitation Region",
+      "image": "images/cav_war_drills.jpg",
+      "buttons": [
+        {
+          "text": "Attend the Drill Publicly",
+          "outcomes": {
+            "resources": {
+              "water": -2
+            },
+            "reputation": {
+              "cavitation": 2,
+              "air": -1,
+              "gas": 0,
+              "oil": 0
+            },
+            "flags": {
+              "FL_MILITARY_EXERCISE_PUBLIC": true
+            }
+          }
+        },
+        {
+          "text": "Avoid the Display",
+          "outcomes": {
+            "resources": {
+              "water": 0
+            },
+            "reputation": {
+              "cavitation": -2,
+              "air": 1,
+              "gas": 0,
+              "oil": 0
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Nightfall of Unease",
+      "text": [
+        "As dusk settles, the sky above Bullospolis glows with unsettling streaks of light—perhaps distant meteor fragments or mere atmospheric tricks. Regardless, the city feels taut as a drawn bow. In the taverns and communal halls, debates rage about how best to handle the looming danger.",
+        "You return to your quarters, aware that the seeds of preparation have been planted throughout the day. Some question your resource allocation, others rally behind your growing leadership. Tomorrow, as the crisis draws nearer, your actions will determine whether Bullospolis stands united or fractures under fear."
+      ],
+      "time": "20:00",
+      "location": "The Capital",
+      "image": "images/nightfall_unease.jpg",
+      "sound": "sounds/muffled_whispers.ogg",
+      "buttons": [
+        {
+          "text": "End Day 2",
+          "outcomes": {
+            "resources": {
+              "water": 0,
+              "gas": 0,
+              "fat": 0,
+              "air": 0,
+              "oil": 0
+            },
+            "reputation": {
+              "oil": 0,
+              "air": 0,
+              "gas": 0,
+              "cavitation": 0
+            },
+            "flags": {}
+          }
+        }
+      ]
+    }
+  ]
+}

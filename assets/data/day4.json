@@ -1,0 +1,398 @@
+{
+  "day": 4,
+  "events": [
+    {
+      "dependencies": [],
+      "title": "A Sky Ablaze",
+      "text": [
+        "The morning light is barely visible through a swirling vortex of ash and fire. Meteors continue raining down, turning the sky red with fury. Panic reverberates across Bullospolis: entire neighborhoods have crumbled, and countless Bubbles cling desperately to life.",
+        "Officials crowd your palace hall, demanding immediate decisions. Each region begs for reprieve, but your resources grow scarcer by the hour. The day of reckoning has arrived, and the question lingers—can the city survive this storm?"
+      ],
+      "time": "06:00",
+      "location": "The Capital",
+      "image": "images/day4_sky_ablaze.jpg",
+      "sound": "sounds/metallic_clash.ogg",
+      "buttons": [
+        {
+          "text": "Accept the Day’s Trials",
+          "outcomes": {
+            "resources": {},
+            "reputation": {},
+            "flags": {
+              "FL_DAY4_BEGINS": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_METEOR_DISSIPATOR_DEPLOYED",
+          "value": true
+        }
+      ],
+      "title": "Meteor Dissipator Under Unbearable Strain",
+      "text": [
+        "Professor Fizz and the Gas Bubbles report that their Meteor Dissipator is buckling under the relentless barrage of incoming fragments. Its mechanisms sputter, threatening an explosive malfunction if pushed further. But shutting it down could unleash unfiltered devastation.",
+        "Sweat—or the Bubble equivalent—drips from Professor Fizz’s surface as they plead for emergency repairs. Engineers warn that funneling additional resources might only buy fleeting time, yet it could save countless lives if the device holds for just another few hours."
+      ],
+      "time": "07:00",
+      "location": "The Gas Region",
+      "image": "images/dissipator_overload.jpg",
+      "buttons": [
+        {
+          "text": "Commit Resources to Repair",
+          "requires": {
+            "resources": {
+              "gas": 5,
+              "oil": 5
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "gas": -5,
+              "oil": -5
+            },
+            "reputation": {
+              "gas": 2
+            },
+            "flags": {
+              "FL_DISSIPATOR_REPAIRED": true
+            }
+          }
+        },
+        {
+          "text": "Shut It Down to Avoid Disaster",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "gas": -2
+            },
+            "flags": {
+              "FL_DISSIPATOR_SHUTDOWN": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_NO_DISSIPATOR_BUILT",
+          "value": true
+        }
+      ],
+      "title": "Meteor Onslaught Unchecked",
+      "text": [
+        "With no Dissipator in place, the massive meteor shards pummel the outskirts uninterrupted. Walls in multiple regions buckle under the onslaught. Fires rage unchecked, forcing panicked evacuations from the outer limits toward the Capital.",
+        "Terror and despair ripple through every district, fueling accusations: the Gas Bubbles blame their lack of funding on your administration, while others rage that no single invention could have saved them anyway. The city fractures further under the chaos."
+      ],
+      "time": "07:00",
+      "location": "The Gas Region",
+      "image": "images/no_dissipator_impact.jpg",
+      "buttons": [
+        {
+          "text": "Absorb the Shock",
+          "outcomes": {
+            "resources": {
+              "gas": -5,
+              "fat": -5
+            },
+            "reputation": {
+              "gas": -2
+            },
+            "flags": {
+              "FL_METEOR_RAMPAGE_CONTINUES": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "A Plea from the Air Region",
+      "text": [
+        "Air Bubbles gather en masse at the city center, their soft murmurs turning into pleas for rescue. Thick smoke and dust hamper their buoyant nature, and they struggle to remain aloft amid swirling debris. If they collapse to the ground en masse, hundreds could burst in the chaos.",
+        "Priests and philosophers from the Air Region suggest forming a makeshift shield—an array of tethered balloons filled with purified air that might deflect smaller fragments. But constructing this shield requires precious resources you may need elsewhere. The Air Region begs for your benevolence."
+      ],
+      "time": "09:00",
+      "location": "The Air Region",
+      "image": "images/air_region_shield.jpg",
+      "buttons": [
+        {
+          "text": "Invest in the Shield",
+          "requires": {
+            "resources": {
+              "air": 10,
+              "fat": 5
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "air": -10,
+              "fat": -5
+            },
+            "reputation": {
+              "air": 3
+            },
+            "flags": {
+              "FL_AIR_SHIELD_CREATED": true
+            }
+          }
+        },
+        {
+          "text": "Cannot Spare Those Resources",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "air": -3
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_WATER_CHANNELS_SAVED",
+          "value": true
+        }
+      ],
+      "title": "Desperate Attempts to Save the Water Supply",
+      "text": [
+        "The Cavitation Region, battered but unbroken, strains to protect the water channels you rescued previously. Meteor impacts crack the channels’ edges; Cavitation soldiers scramble to seal leaks and re-route flow, their explosive bursts ironically helping to fuse emergency patches.",
+        "They beseech you to send a final shipment of materials—wooden braces, gleaned from afar—to reinforce the channels. Yet your storehouses are nearly empty, and other regions demand what remains. Making the choice is like deciding who to let slip into ruin."
+      ],
+      "time": "10:00",
+      "location": "The Cavitation Region",
+      "image": "images/cavitation_reinforce_channels.jpg",
+      "buttons": [
+        {
+          "text": "Double Down on Protection",
+          "requires": {
+            "resources": {
+              "oil": 5,
+              "fat": 5
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "oil": -5,
+              "fat": -5
+            },
+            "reputation": {
+              "cavitation": 2
+            },
+            "flags": {
+              "FL_CHANNELS_FULLY_SECURED": true
+            }
+          }
+        },
+        {
+          "text": "Focus Resources Elsewhere",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "cavitation": -3
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_WATER_CHANNELS_DESTROYED",
+          "value": true
+        }
+      ],
+      "title": "Drinking Water Runs Dry",
+      "text": [
+        "With the water channels in ruins, thirst and desperation ravage Bullospolis. Panic spreads as families scrounge for even a few drops to sustain themselves. Whispers of an exodus echo through the battered streets—some Bubbles would rather flee than die of thirst beneath the meteors.",
+        "Cavitation soldiers, disheartened, no longer have the will to defend a city they feel has forsaken them. Riots brew in the Capital over water rationing. The crisis reaches an explosive new level of social turmoil."
+      ],
+      "time": "10:00",
+      "location": "The Cavitation Region",
+      "image": "images/water_shortage.jpg",
+      "buttons": [
+        {
+          "text": "Enforce Strict Rations",
+          "outcomes": {
+            "resources": {
+              "water": 0
+            },
+            "reputation": {
+              "air": -1,
+              "gas": 0,
+              "oil": -1,
+              "cavitation": -1
+            },
+            "flags": {
+              "FL_WATER_RATIONING_IMPOSED": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_CONSPIRACY_SUPPRESSED",
+          "value": true
+        }
+      ],
+      "title": "Final Dissolution of the Conspirators",
+      "text": [
+        "Thanks to your decisive crackdown, the conspirators have been forced into hiding. Occasional sabotage attempts still occur, but their capacity to cause large-scale devastation is crippled. Loyal Cavitation soldiers arrest key operatives in dawn raids, pulling the last threads of rebellion apart.",
+        "Yet some fear the crackdown has been too harsh. Rumors of wrongful arrests and collateral damage swirl in hushed conversations, casting shadows on your leadership’s moral standing even in the face of meteoric catastrophe."
+      ],
+      "time": "12:00",
+      "location": "The Capital",
+      "image": "images/conspirators_suppressed.jpg",
+      "buttons": [
+        {
+          "text": "Publicly Commend the Crackdown",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "cavitation": 2,
+              "air": -1
+            },
+            "flags": {}
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        {
+          "type": "flag",
+          "name": "FL_CONSPIRACY_GAINS_GROUND",
+          "value": true
+        }
+      ],
+      "title": "Insurrection in the Heart of the City",
+      "text": [
+        "Under cover of chaos, the conspirators exploit the battered city to rally disaffected citizens. Armed with stolen resources, they launch open attacks on the palace district, setting fires and blockading streets. In the confusion of falling meteors, their brazen assault catches many unprepared.",
+        "All eyes turn to you for a forceful response. The conspirators promise to protect those who join them—but under a new rule. Will you divert essential disaster relief to quell this insurrection, or attempt a risky negotiation in hopes of preserving precious resources for meteor defenses?"
+      ],
+      "time": "12:00",
+      "location": "The Capital",
+      "image": "images/conspirators_riot.jpg",
+      "buttons": [
+        {
+          "text": "Mobilize the Military to Crush Them",
+          "requires": {
+            "resources": {
+              "fat": 5
+            }
+          },
+          "outcomes": {
+            "resources": {
+              "fat": -5
+            },
+            "reputation": {
+              "cavitation": 2,
+              "gas": -1,
+              "oil": -1,
+              "air": 0
+            },
+            "flags": {
+              "FL_INSURRECTION_CRUSHED": true
+            }
+          }
+        },
+        {
+          "text": "Attempt Negotiation",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "air": 2,
+              "cavitation": -2
+            },
+            "flags": {
+              "FL_INSURRECTION_NEGOTIATION": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "The Capital in Ruin",
+      "text": [
+        "Midday is cloaked in darkness from towering smoke columns. In the Capital, entire districts lie in rubble. Citizens crowd makeshift shelters or wander aimlessly. Cries for help echo off the battered walls, sometimes drowned out by the thunder of more meteors crashing beyond the horizon.",
+        "Your advisors bombard you with pleas—some wish to evacuate, others insist on a final stand. Aid is demanded everywhere, but your resources can’t possibly meet every need. The question of who is worthy of saving claws at your conscience."
+      ],
+      "time": "14:00",
+      "location": "The Capital",
+      "image": "images/capital_ruins.jpg",
+      "buttons": [
+        {
+          "text": "Issue a General Call for Evacuation",
+          "outcomes": {
+            "resources": {
+              "water": -5
+            },
+            "reputation": {
+              "air": 1,
+              "oil": -1,
+              "gas": 0,
+              "cavitation": 0
+            },
+            "flags": {
+              "FL_CAPITAL_EVACUATION": true
+            }
+          }
+        },
+        {
+          "text": "Maintain Defensive Positions",
+          "outcomes": {
+            "resources": {},
+            "reputation": {
+              "air": -1,
+              "oil": 1,
+              "gas": 0,
+              "cavitation": 2
+            },
+            "flags": {
+              "FL_CAPITAL_DEFENDED": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dependencies": [],
+      "title": "Dusk of Desperation",
+      "text": [
+        "As the fourth day nears its end, the city teeters on the brink of collapse. Every step you’ve taken has come at a terrible cost, with countless Bubbles bursting in the crossfire between meteors, sabotage, and desperation. In the streets, sorrow and anger swirl in equal measure.",
+        "Nightfall grows near, and with it, an uneasy lull. Tomorrow could bring partial relief—or renewed destruction. Surviving this day, however narrowly, may be a testament to your leadership—or a sign of the final hour for Bullospolis."
+      ],
+      "time": "20:00",
+      "location": "The Capital",
+      "image": "images/day4_dusk.jpg",
+      "sound": "sounds/low_rumble.ogg",
+      "buttons": [
+        {
+          "text": "End Day 4",
+          "outcomes": {
+            "resources": {},
+            "reputation": {},
+            "flags": {
+              "FL_DAY4_ENDED": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
