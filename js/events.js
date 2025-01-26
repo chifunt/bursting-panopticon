@@ -79,11 +79,11 @@ export const Events = (() => {
     // Extract resource deductions (amount < 0)
     if (jsonButton.outcomes && jsonButton.outcomes.resources) {
       const deductions = [];
-      for (const [resName, amount] of Object.entries(jsonButton.outcomes.resources)) {
-        if (amount < 0) {
-          // Capitalize the resource name for better readability
+      const sortedResources = Object.entries(jsonButton.outcomes.resources).sort(([, amountA], [, amountB]) => amountA - amountB);
+      for (const [resName, amount] of sortedResources) {
+        if (amount != 0) {
           const resourceDisplayName = resName.charAt(0).toUpperCase() + resName.slice(1);
-          deductions.push(`${resourceDisplayName}: ${amount}`);
+          deductions.push(`${resourceDisplayName}: ${amount > 0 ? "+" : ""} ${amount}`);
         }
       }
       deductionsText = deductions.join(', '); // e.g., "Water: -5, Oil: -5"
