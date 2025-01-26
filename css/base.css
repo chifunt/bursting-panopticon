@@ -2,6 +2,11 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: "Bubbler One";
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 button {
