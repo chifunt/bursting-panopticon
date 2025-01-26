@@ -20,7 +20,6 @@ export const Events = (() => {
           text: "Let all the air bubbles burst, I don't care!",
           action: () => {
             // Hide the marker and the event popup
-            Markers.hideMarker('pin-capital');
             hideEventPopup();
             // Resume time
             TimeManager.startTime();
@@ -45,7 +44,6 @@ export const Events = (() => {
           text: "Handle the air event appropriately.",
           action: () => {
             // Hide the marker and the event popup
-            Markers.hideMarker('pin-air');
             hideEventPopup();
             // Resume time
             TimeManager.startTime();
