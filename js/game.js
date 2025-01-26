@@ -48,6 +48,7 @@ export const Game = (() => {
 
   // Handle marker click events to show associated events
   const handleMarkerClick = (markerId) => {
+    Markers.hideMarker(markerId);
     Events.handleMarkerEvent(markerId);
   };
 
