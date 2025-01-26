@@ -1,5 +1,6 @@
 import { Utils } from './utils.js';
 import { Game } from './game.js';
+import { EndManager } from './endManager.js'; // Import EndManager
 
 export const TimeManager = (() => {
   let currentDay = 1;
@@ -56,6 +57,7 @@ export const TimeManager = (() => {
       currentDay = 5; // Maximum day reached
       stopTime();
       Utils.log('Maximum day reached.');
+      EndManager.showEndScreen('max_day'); // Trigger end screen
       return;
     }
     Game.onNextDay(currentDay);
@@ -72,7 +74,8 @@ export const TimeManager = (() => {
   };
 
   const getCurrentDay = () => currentDay;
-  const getCurrentTime = () => `${String(currentTime.hours).padStart(2, '0')}:${String(currentTime.minutes).padStart(2, '0')}`;
+  const getCurrentTime = () =>
+    `${String(currentTime.hours).padStart(2, '0')}:${String(currentTime.minutes).padStart(2, '0')}`;
 
   return {
     startTime,

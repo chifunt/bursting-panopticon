@@ -17,6 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize and start the game
     Game.init();
-    Game.TimeManager.setMinuteDuration(20);
+    Game.TimeManager.setMinuteDuration(2);
   });
 });
