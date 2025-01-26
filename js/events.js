@@ -77,13 +77,20 @@ export const Events = (() => {
     let deductionsText = '';
 
     // Extract resource deductions (amount < 0)
-    if (jsonButton.outcomes && jsonButton.outcomes.resources) {
+    if (jsonButton.outcomes && jsonButton.outcomes.resources && jsonButton.outcomes.reputation) {
       const deductions = [];
       const sortedResources = Object.entries(jsonButton.outcomes.resources).sort(([, amountA], [, amountB]) => amountA - amountB);
+      const sortedRep = Object.entries(jsonButton.outcomes.reputation).sort(([, amountA], [, amountB]) => amountA - amountB);
       for (const [resName, amount] of sortedResources) {
         if (amount != 0) {
           const resourceDisplayName = resName.charAt(0).toUpperCase() + resName.slice(1);
           deductions.push(`${resourceDisplayName}: ${amount > 0 ? "+" : ""} ${amount}`);
+        }
+      }
+      for (const [repName, amount] of sortedRep) {
+        if (amount != 0) {
+          const repDisplayName = repName.charAt(0).toUpperCase() + repName.slice(1);
+          deductions.push(`${repDisplayName} Reputation: ${amount > 0 ? "+" : ""} ${amount}`);
         }
       }
       deductionsText = deductions.join(', '); // e.g., "Water: -5, Oil: -5"
