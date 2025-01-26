@@ -11,7 +11,7 @@
       "time": "07:00",
       "location": "The Capital",
       "image": "images/caesar_coronation.jpg",
-      "sound": "sounds/crowd_cheer.ogg",
+      "sound": "assets/sounds/sfx/cheering_bubbles.mp3",
       "buttons": [
         {
           "text": "Acknowledge Your New Role",
