@@ -154,7 +154,7 @@ export const Events = (() => {
     if (event.triggered) return;
 
     // Set fallback image if the original fails
-    eventImage.onerror = function() {
+    eventImage.onerror = function () {
       if (this.src !== window.location.origin + '/' + DEFAULT_IMAGE_SRC) {
         this.src = DEFAULT_IMAGE_SRC;
       }
@@ -163,6 +163,7 @@ export const Events = (() => {
 
     eventTitle.innerText = event.title;
 
+    // Clear and populate text container
     eventTextContainer.innerHTML = '';
     event.paragraphs.forEach(par => {
       const p = document.createElement('p');
@@ -170,6 +171,10 @@ export const Events = (() => {
       eventTextContainer.appendChild(p);
     });
 
+    // **Force scroll to top**
+    eventTextContainer.scrollTop = 0;
+
+    // Clear and populate buttons container
     eventButtonsContainer.innerHTML = '';
     event.buttons.forEach(btn => {
       const buttonElem = document.createElement('button');
