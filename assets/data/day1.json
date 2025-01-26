@@ -107,7 +107,7 @@
       ],
       "time": "10:00",
       "location": "The Capital",
-      "image": "images/gas_inventors.jpg",
+      "image": "assets/images/gas-visit.jpg",
       "sound": "assets/sounds/sfx/bubble_meeting.mp3",
       "buttons": [
         {
@@ -155,7 +155,7 @@
       ],
       "time": "11:00",
       "location": "The Cavitation Region",
-      "image": "images/cav_warriors.jpg",
+      "image": "assets/images/cavitation-visit.jpg",
       "sound": "sounds/heavy_drums.ogg",
       "buttons": [
         {
