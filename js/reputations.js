@@ -31,7 +31,7 @@ export const Reputations = (() => {
     if (reputations.hasOwnProperty(name)) {
       reputations[name] += amount;
       // Prevent negative values
-      if (reputations[name] < 0) reputations[name] = 0;
+      // if (reputations[name] < 0) reputations[name] = 0;
       // Optional: Clamp to a maximum value
       const MAX_REPUTATION_VALUE = 1000;
       if (reputations[name] > MAX_REPUTATION_VALUE) reputations[name] = MAX_REPUTATION_VALUE;
