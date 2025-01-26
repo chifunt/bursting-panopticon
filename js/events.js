@@ -202,6 +202,18 @@ export const Events = (() => {
         buttonElem.setAttribute('data-deductions', btn.deductions);
       }
 
+      // Check if requirements are met
+      const isEnabled = checkButtonRequirements(btn.requires);
+      buttonElem.disabled = !isEnabled;
+
+      // If the button is disabled, set a data-tooltip explaining why
+      if (!isEnabled) {
+        const tooltipText = generateRequirementsTooltip(btn.requires);
+        buttonElem.setAttribute('data-tooltip', tooltipText);
+        // Optionally, add a CSS class for styling disabled buttons
+        buttonElem.classList.add('disabled-button');
+      }
+
       buttonElem.addEventListener('click', btn.action);
       eventButtonsContainer.appendChild(buttonElem);
     });
@@ -229,6 +241,93 @@ export const Events = (() => {
     if (event) {
       showEvent(event);
     }
+  };
+
+  /**
+   * Helper function to check if button requirements are met
+   * @param {Object} requires - The requirements object from the button
+   * @returns {Boolean} - True if all requirements are met, else false
+   */
+  const checkButtonRequirements = (requires) => {
+    if (!requires || Object.keys(requires).length === 0) {
+      return true;
+    }
+
+    // Check resource requirements
+    if (requires.resources) {
+      for (const [resName, amount] of Object.entries(requires.resources)) {
+        if (Resources.getResource(resName) < amount) {
+          return false;
+        }
+      }
+    }
+
+    // Check reputation requirements
+    if (requires.reputation) {
+      for (const [repName, amount] of Object.entries(requires.reputation)) {
+        if (Reputations.getReputation(repName) < amount) {
+          return false;
+        }
+      }
+    }
+
+    // Check flag requirements
+    if (requires.flags) {
+      for (const [flagName, flagValue] of Object.entries(requires.flags)) {
+        if (Flags.getFlag(flagName) !== flagValue) {
+          return false;
+        }
+      }
+    }
+
+    // All requirements met
+    return true;
+  };
+
+  /**
+   * Helper function to generate a tooltip text based on unmet requirements
+   * @param {Object} requires - The requirements object from the button
+   * @returns {String} - The tooltip text explaining unmet requirements
+   */
+  const generateRequirementsTooltip = (requires) => {
+    if (!requires || Object.keys(requires).length === 0) {
+      return '';
+    }
+
+    const unmet = [];
+
+    // Check resource requirements
+    if (requires.resources) {
+      for (const [resName, amount] of Object.entries(requires.resources)) {
+        if (Resources.getResource(resName) < amount) {
+          const resourceDisplayName = resName.charAt(0).toUpperCase() + resName.slice(1);
+          unmet.push(`${resourceDisplayName}: ${amount} required`);
+        }
+      }
+    }
+
+    // Check reputation requirements
+    if (requires.reputation) {
+      for (const [repName, amount] of Object.entries(requires.reputation)) {
+        if (Reputations.getReputation(repName) < amount) {
+          const reputationDisplayName = repName.charAt(0).toUpperCase() + repName.slice(1);
+          unmet.push(`${reputationDisplayName}: ${amount} required`);
+        }
+      }
+    }
+
+    // Check flag requirements
+    if (requires.flags) {
+      for (const [flagName, flagValue] of Object.entries(requires.flags)) {
+        if (Flags.getFlag(flagName) !== flagValue) {
+          const flagDisplayName = flagName.replace(/FL_/g, '').replace(/_/g, ' ').toLowerCase();
+          unmet.push(`Flag "${flagDisplayName}" must be ${flagValue}`);
+        }
+      }
+    }
+
+    // Combine all unmet requirements into a single string
+    return unmet.join(', ');
   };
 
   // Expose methods

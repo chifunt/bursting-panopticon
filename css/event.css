@@ -109,3 +109,15 @@
 .event-buttons-container button:hover::after {
   opacity: 1;
 }
+
+.event-buttons-container button:disabled {
+  color: black; /* Define this variable */
+  box-shadow: black 0 0 1vw inset;
+  border: 0.2vw black solid;
+}
+.event-buttons-container button:disabled:hover {
+  color: black; /* Define this variable */
+  box-shadow: black 0 0 1vw inset;
+  border: 0.2vw black solid;
+  text-shadow: none;
+}
