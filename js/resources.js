@@ -1,10 +1,10 @@
 export const Resources = (() => {
   const resources = {
-    water: 134,
-    gas: 243,
-    fat: 233,
-    air: 454,
-    oil: 532,
+    water: 50,
+    gas: 30,
+    fat: 40,
+    air: 50,
+    oil: 40,
   };
 
   const getResource = (name) => resources[name];

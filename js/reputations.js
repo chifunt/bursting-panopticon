@@ -1,9 +1,9 @@
 export const Reputations = (() => {
   const reputations = {
-    air: 102,
-    oil: 103,
-    gas: 104,
-    cavitation: 105,
+    air: 0,
+    oil: 0,
+    gas: 0,
+    cavitation: 0,
   };
 
   const getReputation = (name) => reputations[name];
