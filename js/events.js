@@ -1,124 +1,201 @@
 import { Utils } from './utils.js';
 import { TimeManager } from './timeManager.js';
-import { Markers } from './markers.js';
+import { Resources } from './resources.js';
+import { Reputations } from './reputations.js';
+import { Flags } from './flags.js';
+import { LOCATION_MARKER_MAP } from './eventsLocationMap.js';
 
 export const Events = (() => {
-  const eventList = [
-    {
-      id: 'event-capital-06-00',
-      day: 1,
-      time: '06:00',
-      markerId: 'pin-capital',
-      title: 'Capital Event',
-      imageSrc: 'assets/images/event-wide-sample.png',
-      paragraphs: [
-        'Capital event has occurred. Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        'Further details about the capital event are provided here.'
-      ],
-      buttons: [
-        {
-          text: "Let all the air bubbles burst, I don't care!",
-          action: () => {
-            // Hide the marker and the event popup
-            hideEventPopup();
-            // Resume time
-            TimeManager.startTime();
-          }
-        }
-      ],
-      triggered: false
-    },
-    {
-      id: 'event-air-12-00',
-      day: 1,
-      time: '12:00',
-      markerId: 'pin-air',
-      title: 'Air Event',
-      imageSrc: 'assets/images/event-wide-sample.png',
-      paragraphs: [
-        'Air event has occurred. Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        'Further details about the air event are provided here.'
-      ],
-      buttons: [
-        {
-          text: "Handle the air event appropriately.",
-          action: () => {
-            // Hide the marker and the event popup
-            hideEventPopup();
-            // Resume time
-            TimeManager.startTime();
-          }
-        }
-      ],
-      triggered: false
-    }
-    // Add more events as needed
-  ];
+  let eventList = [];
 
-  // Reference to DOM elements
+  const DEFAULT_IMAGE_SRC = 'assets/images/event-wide-sample.png';
+
+  // DOM references
   const eventPopup = document.querySelector('.event-popup');
   const eventImage = eventPopup.querySelector('img');
   const eventTitle = eventPopup.querySelector('h2');
   const eventTextContainer = eventPopup.querySelector('.event-text-container');
   const eventButtonsContainer = eventPopup.querySelector('.event-buttons-container');
 
-  // Initialize the event popup as hidden
-  const init = () => {
+  // 1. Load all JSON files for days 1 through 5
+  const init = async () => {
     hideEventPopup();
+
+    // If you add more days, just add them here:
+    const dayFiles = [
+      'assets/data/day1.json',
+      'assets/data/day2.json',
+      'assets/data/day3.json',
+      'assets/data/day4.json',
+      'assets/data/day5.json'
+    ];
+
+    try {
+      for (const filePath of dayFiles) {
+        const response = await fetch(filePath);
+        if (!response.ok) {
+          throw new Error(`Failed to load ${filePath}: ${response.statusText}`);
+        }
+        const dayData = await response.json();
+
+        // Merge each day's events into the master list
+        const transformedEvents = dayData.events.map((evt, index) =>
+          transformJsonEvent(evt, index, dayData.day)
+        );
+        eventList = eventList.concat(transformedEvents);
+
+        Utils.log(`Loaded events from ${filePath}`);
+      }
+
+      Utils.log('All day JSON files loaded and transformed.');
+    } catch (error) {
+      Utils.log(`Error initializing events: ${error.message}`);
+    }
   };
 
-  // Show event popup with specific event data
+  // 2. Transform raw JSON event to internal shape
+  const transformJsonEvent = (jsonEvent, index, dayNumber) => {
+    const id = `event-day${dayNumber}-${jsonEvent.time || 'XX:XX'}-${index}`;
+    const markerId = LOCATION_MARKER_MAP[jsonEvent.location] || 'pin-capital';
+
+    return {
+      id,
+      day: dayNumber,
+      time: jsonEvent.time,
+      markerId,
+      title: jsonEvent.title,
+      imageSrc: jsonEvent.image,
+      soundSrc: jsonEvent.sound || null,
+      paragraphs: jsonEvent.text,
+      buttons: (jsonEvent.buttons || []).map(btn => transformJsonButton(btn)),
+      dependencies: jsonEvent.dependencies || [],
+      triggered: false
+    };
+  };
+
+  // 3. Transform JSON button to internal structure
+  const transformJsonButton = (jsonButton) => {
+    return {
+      text: jsonButton.text,
+      requires: jsonButton.requires || {},
+      action: () => {
+        if (jsonButton.outcomes) {
+          const { resources, reputation, flags } = jsonButton.outcomes;
+
+          // Update resources
+          if (resources) {
+            Object.entries(resources).forEach(([resName, amount]) => {
+              Resources.changeResource(resName, amount);
+            });
+          }
+
+          // Update reputation
+          if (reputation) {
+            Object.entries(reputation).forEach(([repName, amount]) => {
+              Reputations.changeReputation(repName, amount);
+            });
+          }
+
+          // Update flags
+          if (flags) {
+            Object.entries(flags).forEach(([flagName, flagValue]) => {
+              Flags.setFlag(flagName, flagValue);
+            });
+          }
+        }
+
+        // Close popup, resume time
+        hideEventPopup();
+        TimeManager.startTime();
+      }
+    };
+  };
+
+  // 4. Check dependencies (flags, resources, reputation)
+  const checkDependencies = (event) => {
+    if (!event.dependencies || event.dependencies.length === 0) {
+      return true;
+    }
+    for (const dep of event.dependencies) {
+      const { type, name, value } = dep;
+      if (type === 'flag') {
+        if (Flags.getFlag(name) !== value) {
+          return false;
+        }
+      } else if (type === 'resource') {
+        if (Resources.getResource(name) < value) {
+          return false;
+        }
+      } else if (type === 'reputation') {
+        if (Reputations.getReputation(name) < value) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+
+  // 5. Find events for a given day & time
+  const getEventByTime = (day, time) => {
+    return eventList.find(
+      e => e.day === day && e.time === time && !e.triggered && checkDependencies(e)
+    );
+  };
+
+  // 6. Find events for a marker
+  const getEventByMarker = (markerId) => {
+    return eventList.find(
+      e => e.markerId === markerId && !e.triggered && checkDependencies(e)
+    );
+  };
+
+  // 7. Show event popup
   const showEvent = (event) => {
     if (event.triggered) return;
 
-    // Populate the popup with event data
+    // Set fallback image if the original fails
+    eventImage.onerror = function() {
+      if (this.src !== window.location.origin + '/' + DEFAULT_IMAGE_SRC) {
+        this.src = DEFAULT_IMAGE_SRC;
+      }
+    };
     eventImage.src = event.imageSrc;
+
     eventTitle.innerText = event.title;
+
     eventTextContainer.innerHTML = '';
-    event.paragraphs.forEach(paragraph => {
+    event.paragraphs.forEach(par => {
       const p = document.createElement('p');
-      p.innerText = paragraph;
+      p.innerText = par;
       eventTextContainer.appendChild(p);
     });
 
     eventButtonsContainer.innerHTML = '';
-    event.buttons.forEach(button => {
-      const btn = document.createElement('button');
-      btn.innerText = button.text;
-      btn.addEventListener('click', button.action);
-      eventButtonsContainer.appendChild(btn);
+    event.buttons.forEach(btn => {
+      const buttonElem = document.createElement('button');
+      buttonElem.innerText = btn.text;
+      buttonElem.addEventListener('click', btn.action);
+      eventButtonsContainer.appendChild(buttonElem);
     });
 
-    // Instead of eventPopup.style.display = 'flex';
-    // just add the 'visible' class:
+    // Play sound if provided
+    if (event.soundSrc) {
+      const audio = new Audio(event.soundSrc);
+      audio.play();
+    }
+
     eventPopup.classList.add('visible');
-
     Utils.log(`Event "${event.id}" displayed.`);
-
-    // Mark the event as triggered
     event.triggered = true;
   };
 
-  // Hide the event popup
+  // 8. Hide event popup
   const hideEventPopup = () => {
-    // Instead of eventPopup.style.display = 'none';
-    // remove the 'visible' class:
     eventPopup.classList.remove('visible');
-
     Utils.log('Event popup hidden.');
   };
 
-  // Find and return event based on day and time
-  const getEventByTime = (day, time) => {
-    return eventList.find(event => event.day === day && event.time === time && !event.triggered);
-  };
-
-  // Find and return event based on markerId
-  const getEventByMarker = (markerId) => {
-    return eventList.find(event => event.markerId === markerId && !event.triggered);
-  };
-
-  // Handle marker click to show associated event
+  // 9. Marker click -> show event
   const handleMarkerEvent = (markerId) => {
     const event = getEventByMarker(markerId);
     if (event) {
@@ -126,6 +203,7 @@ export const Events = (() => {
     }
   };
 
+  // Expose methods
   return {
     init,
     showEvent,
