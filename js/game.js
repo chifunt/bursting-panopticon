@@ -4,6 +4,7 @@ import { TimeManager } from './timeManager.js';
 import { Utils } from './utils.js';
 import { Markers } from './markers.js';
 import { Events } from './events.js';
+import { Flags } from './flags.js';
 
 export const Game = (() => {
   const debugMode = true;
@@ -16,6 +17,8 @@ export const Game = (() => {
     // Initialize Resources and Reputations in the DOM
     Resources.init();
     Reputations.init();
+
+    Flags.init();
 
     // Initialize Markers
     Markers.init();
