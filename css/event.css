@@ -20,7 +20,6 @@
   transition: opacity 0.2s ease-in-out; /* 0.5s fade animation */
 }
 
-/* When visible, make it flex and fully opaque */
 .event-popup.visible {
   display: flex;
   opacity: 1;
@@ -64,4 +63,49 @@
 .event-popup button {
   font-size: 2vw;
   padding: 0.5vw;
+}
+
+.event-buttons-container button {
+  position: relative;
+  padding: 0.5vw 1vw;
+  font-size: 2vw;
+  cursor: pointer;
+  border: 0.2vw solid #ccc;
+  border-radius: 0.5vw;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Optional: Change button style on hover */
+.event-buttons-container button:hover {
+  background-color: var(--button-hover-bg-color); /* Define this variable */
+  color: var(--oil-color); /* Define this variable */
+  box-shadow: var(--oil-color) 0 0 1vw;
+  border: 0.2vw var(--oil-color) solid;
+}
+
+/* 2. Style the ::after pseudo-element to show deductions */
+.event-buttons-container button::after {
+  content: attr(data-deductions); /* Use the data-deductions attribute */
+  position: absolute;
+  top: 100%; /* Position below the button */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8); /* Tooltip background color */
+  color: #fff; /* Tooltip text color */
+  padding: 0.5vw;
+  border-radius: 0.5vw;
+  white-space: nowrap;
+  opacity: 0; /* Hidden by default */
+  pointer-events: none; /* Prevent mouse events */
+  transition: opacity 0.3s ease;
+  margin-top: 0.5vw; /* Space between button and tooltip */
+  font-size: 1.2vw;
+  z-index: 10;
+}
+
+/* 3. Show the ::after tooltip on hover */
+.event-buttons-container button:hover::after {
+  opacity: 1;
 }

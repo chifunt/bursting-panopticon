@@ -1,3 +1,4 @@
+// Events.js
 import { Utils } from './utils.js';
 import { TimeManager } from './timeManager.js';
 import { Resources } from './resources.js';
@@ -75,9 +76,25 @@ export const Events = (() => {
 
   // 3. Transform JSON button to internal structure
   const transformJsonButton = (jsonButton) => {
+    let deductionsText = '';
+
+    // Extract resource deductions (amount < 0)
+    if (jsonButton.outcomes && jsonButton.outcomes.resources) {
+      const deductions = [];
+      for (const [resName, amount] of Object.entries(jsonButton.outcomes.resources)) {
+        if (amount < 0) {
+          // Capitalize the resource name for better readability
+          const resourceDisplayName = resName.charAt(0).toUpperCase() + resName.slice(1);
+          deductions.push(`${resourceDisplayName}: ${amount}`);
+        }
+      }
+      deductionsText = deductions.join(', '); // e.g., "Water: -5, Oil: -5"
+    }
+
     return {
       text: jsonButton.text,
       requires: jsonButton.requires || {},
+      deductions: deductionsText, // Add deductionsText to the button object
       action: () => {
         if (jsonButton.outcomes) {
           const { resources, reputation, flags } = jsonButton.outcomes;
@@ -104,7 +121,7 @@ export const Events = (() => {
           }
         }
 
-        // Close popup, resume time
+        // Close popup and resume time
         hideEventPopup();
         TimeManager.startTime();
       }
@@ -179,6 +196,12 @@ export const Events = (() => {
     event.buttons.forEach(btn => {
       const buttonElem = document.createElement('button');
       buttonElem.innerText = btn.text;
+
+      // Set data-deductions attribute if deductions exist
+      if (btn.deductions) {
+        buttonElem.setAttribute('data-deductions', btn.deductions);
+      }
+
       buttonElem.addEventListener('click', btn.action);
       eventButtonsContainer.appendChild(buttonElem);
     });
